@@ -1,0 +1,11 @@
+{
+  "name": "Billing-App-Frontend-angular",
+  "version": "0.0.1",
+  "appPath": "public",
+  "dependencies": {
+    "bootstrap": "*",
+    "angular": "*",
+    "angular-ui": "*",
+    "angular-ui-router": "*"
+  }
+}
