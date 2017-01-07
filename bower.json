@@ -6,6 +6,7 @@
     "bootstrap": "*",
     "angular": "*",
     "angular-ui": "*",
+    "font-awesome": "*",
     "angular-ui-router": "*"
   }
 }

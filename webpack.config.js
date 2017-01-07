@@ -7,7 +7,7 @@ var path = require('path');
 var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 let bowerModulePath = path.resolve(__dirname, 'frontend', 'lib');
 var assetsPath = path.resolve(__dirname, 'public', 'assets');
-var entryPath = path.resolve(__dirname, 'frontend', 'app.module.js');
+var entryPath = path.resolve(__dirname, 'frontend', 'index.module.js');
 var host = process.env.APP_HOST || 'localhost';
 
 var config = {
@@ -36,13 +36,15 @@ var config = {
             {test: /\.js$/, loader: 'babel-loader'},
             {
                 test: /\.css$/,
-                loader: 'style!css!postcss',
-                path: assetsPath,
-                filename: 'style.css'
+                //loader: 'style!css!postcss',
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
             },
             {
                 test: /\.less$/,
-                loader: 'style!css!postcss!less'
+                //loader: 'style!css!postcss!less'
+                loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+                /*path: assetsPath,
+                filename: 'styles.less'*/
             },
             {
                 test: /\.html$/,
@@ -61,6 +63,7 @@ var config = {
     postcss: [autoPreFixer],
 
     plugins: [
+        new ExtractTextPlugin(assetsPath+"/styles.css"),
         // We have to manually add the Hot Replacement plugin when running
         // from Node
         new Webpack.HotModuleReplacementPlugin()

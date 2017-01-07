@@ -2,6 +2,11 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let addressSchema = new Schema({
+    addressType:{
+        type: String,
+        trim: true,
+        default: 'Home'
+    },
     contactName: {
         type: String,
         trim: true,

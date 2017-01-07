@@ -52,14 +52,18 @@ let UserSchema = new mongoose.Schema({
         ref: "Address",
         default: null
     }],
+    dob: {
+        type: Date,
+        required: true
+    },
     stores: [{
         type: mongoose.Schema.ObjectId,
         ref: "Store",
         default: null
     }],
-    roles: {
+    role: {
         type: String,
-        default: 'user'
+        default: 'USER'
     },
     updated: {
         type: Date
@@ -150,6 +154,7 @@ UserSchema.statics.getAuthenticated = function (user, callback) {
                     let token = jsonWebToken.sign(user, 'superSecret', {
                         expiresIn: 86400 // expires in 24 hours, expressed in seconds
                     });
+                    console.log(token);
                     return callback(null, token, user);
                 }
                 else {
@@ -183,7 +188,15 @@ UserSchema.statics.Create = function (user, callback) {
                 password: user.password,
                 username: user.username,
                 firstName: user.firstName,
-                lastName: user.lastName
+                lastName: user.lastName,
+                displayName: user.displayName,
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                address: user.address !== undefined ? user.address : null,
+                dob: user.dob,
+                stores: user.stores !== undefined ? user.stores : null,
+                role: user.role,
+                created: new Date()
             });
 
             // save the user
