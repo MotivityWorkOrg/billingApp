@@ -1,4 +1,6 @@
 import AuthController from './auth/auth.controller';
+import ItemController from './components/items/item.controller';
+import {StoreController} from './components/stores/store.controller';
 
 function config($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
@@ -21,11 +23,25 @@ function config($stateProvider, $urlRouterProvider, $locationProvider) {
             title: 'Registration'
         })
         .state('forgotPassword', {
-            utl: '/forgotpassword',
+            url: '/forgotpassword',
             template: require('./auth/forgotpassword.html'),
             controller: AuthController,
             controllerAs: 'auth',
             title: 'Forgot Password'
+        })
+        .state('items', {
+            url: '/items',
+            template: require('./components/items/items-page.html'),
+            controller: ItemController,
+            title: 'items'
+        })
+        .state('home', {
+            url: '/home',
+            template: require('./components/home/home-page.html')
+        })
+        .state('stores', {
+            url: '/stores',
+            template: require('./components/stores/store-page.html')
         });
 }
 

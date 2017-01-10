@@ -16,5 +16,12 @@ let itemSchema = new Schema({
     itemCode: {
         type: String,
         required: true
+    },
+    path: {
+        type: String,
+        required: true,
+        trim: true
     }
 });
+
+module.exports = mongoose.model('Item', itemSchema);

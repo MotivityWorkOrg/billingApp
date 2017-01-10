@@ -121,7 +121,7 @@ UserSchema.methods.comparePassword = function (candidatePassword, callback) {
  * Statics
  */
 UserSchema.statics.getAuthenticated = function (user, callback) {
-    console.log('getAuthenticated', user);
+    //console.log('getAuthenticated', user);
     this.findOne({username: user.username}, function (err, doc) {
         if (err) {
             console.log(err);
@@ -146,15 +146,16 @@ UserSchema.statics.getAuthenticated = function (user, callback) {
                     let user = {
                         username: doc.username,
                         id: doc.id,
-                        firstName: doc.firstName,
-                        lastName: doc.lastName
+                        displayName: doc.displayName,
+                        stores: doc.stores,
+                        role: doc.role
                     };
 
                     // return the jwt
                     let token = jsonWebToken.sign(user, 'superSecret', {
                         expiresIn: 86400 // expires in 24 hours, expressed in seconds
                     });
-                    console.log(token);
+                    //console.log(token);
                     return callback(null, token, user);
                 }
                 else {

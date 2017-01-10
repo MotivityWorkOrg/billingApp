@@ -4,13 +4,19 @@ let console = require('console');
 
 module.exports = {
     login: function (req, res) {
-        console.log(req.body);
-        User.getAuthenticated(req.body, function (err, token) {
+        //console.log(req.body);
+        User.getAuthenticated(req.body, function (err, token, user) {
+            console.log(user);
             if (err) {
                 console.log(err.message);
                 res.status(400).send(err.message);
             } else {
-                res.send(token);
+                let response = {};
+                response.token = token;
+                user.permissions = getPermissions(user.role);
+                user.isAthenticated = true;
+                response.user = user;
+                res.send(response);
             }
         });
     },
@@ -38,3 +44,10 @@ module.exports = {
         }
     }
 };
+
+function getPermissions(role) {
+    if(role === 'ADMIN'){
+        return ['stores', 'update-profile', 'user-update', 'items', 'orders']
+    }
+    return ['items', 'orders'];
+}

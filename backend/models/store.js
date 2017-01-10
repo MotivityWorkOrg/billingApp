@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let storeSchema = new mongoose.Schema({
-    _id: {
+    name: {
         type: String,
         required: true
     },
@@ -11,14 +11,10 @@ let storeSchema = new mongoose.Schema({
         ref: "Address",
         required: 'store address is required'
     },
-    adminUsers: [{
+    user: {
         type: mongoose.Schema.ObjectId,
         ref: "User"
-    }],
-    storeUsers: [{
-        type: mongoose.Schema.ObjectId,
-        ref: "User"
-    }]
+    }
 });
 
 module.exports = mongoose.model("Store", storeSchema);

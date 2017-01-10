@@ -1,0 +1,119 @@
+<nav-bar></nav-bar>
+<div class="center-block" ng-controller="StoreController as storeCtrl"
+     style="border: 2px solid #083858; border-radius: 8px; width: 450px; padding: 0 10px 20px 20px;">
+    <h1 class="text-center" style="color: #083858;">Add New Store</h1>
+
+    <form class="form" name="form" novalidate>
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
+                                          'has-error': form.name.$invalid && submitted }">
+            <label style="color: #083858;">Store Name</label>
+
+            <input type="text" name="name" placeholder="Enter Store Name" class="form-control" ng-model="store.name"
+                   required/>
+            <p class="help-block" ng-show="form.name.$error.required && submitted">
+                A name is required
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.contactName.$valid && submitted,
+                                          'has-error': form.contactName.$invalid && submitted }">
+            <label style="color: #083858;">Contact Name</label>
+
+            <input type="text" name="contactName" placeholder="Enter ContactName" class="form-control"
+                   ng-model="store.contactName"
+                   required/>
+            <p class="help-block" ng-show="form.contactName.$error.required && submitted">
+                A contact name is required
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success':form.address1.$valid && submitted,
+                                          'has-error': form.address1.$invalid && submitted }">
+            <label style="color: #083858;">Address1</label>
+            <input type="text" name="address1" placeholder="Enter Address1" class="form-control"
+                   ng-model="store.address1"
+                   required
+                   mongoose-error/>
+            <p class="help-block" ng-show="form.address1.$error.email && submitted">
+                Doesn't look like a valid address.
+            </p>
+            <p class="help-block" ng-show="form.address1.$error.required && submitted">
+                What's your address?
+            </p>
+            <p class="help-block" ng-show="form.address1.$error.mongoose">
+                {{ errors.email }}
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.address2.$valid && submitted,
+                                          'has-error': form.address2.$invalid && submitted }">
+            <label style="color: #083858;">Address2</label>
+
+            <input type="text" name="address2" placeholder="Enter Address2" class="form-control"
+                   ng-model="store.address2"
+                   required/>
+            <p class="help-block" ng-show="form.address2.$error.required && submitted">
+                A Address2 is required
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.city.$valid && submitted,
+                                          'has-error': form.city.$invalid && submitted }">
+            <label style="color: #083858;">City</label>
+
+            <input type="text" name="city" placeholder="Enter City" class="form-control"
+                   ng-model="store.city"
+                   required
+                   mongoose-error/>
+            <p class="help-block" ng-show="form.city.$error.mongoose">
+                {{ errors.password }}
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.pinCode.$valid && submitted,
+                                          'has-error': form.pinCode.$invalid && submitted }">
+            <label style="color: #083858;">PinCode</label>
+
+            <input type="text" name="pinCode" placeholder="Enter PinCode" class="form-control"
+                   ng-model="store.pinCode"
+                   required
+                   mongoose-error/>
+            <p class="help-block" ng-show="form.pinCode.$error.mongoose">
+                {{ errors.pinCode }}
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.state.$valid && submitted,
+                                          'has-error': form.state.$invalid && submitted }">
+            <label style="color: #083858;">State</label>
+
+            <input type="text" name="state" placeholder="Enter State" class="form-control"
+                   ng-model="store.state"
+                   required
+                   mongoose-error/>
+            <p class="help-block" ng-show="form.state.$error.mongoose">
+                {{ errors.password }}
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
+                                          'has-error': form.phoneNumber.$invalid && submitted }">
+            <label style="color: #083858;">Phone Number</label>
+
+            <input type="number" name="phoneNumber" placeholder="Enter phone number" class="form-control"
+                   ng-model="store.telephone"
+                   ng-maxlength="10"
+                   required
+                   mongoose-error/>
+            <p class="help-block"
+               ng-show="(form.phoneNumber.$error.maxlength || form.phoneNumber.$error.required) && submitted">
+                Phone Number must be 10 characters.
+            </p>
+            <p class="help-block" ng-show="form.phoneNumber.$error.mongoose">
+                {{ errors.phoneNumber }}
+            </p>
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit" ng-click="storeCtrl.createStore(store)" >
+                Add
+            </button>
+            <button class="btn btn-danger" type="submit" ng-click="storeCtrl.refresh(event)">
+                Cancel
+            </button>
+        </div>
+    </form>
+
+</div>

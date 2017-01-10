@@ -10,6 +10,7 @@ let httpProxy = require('http-proxy');
 let proxy = httpProxy.createProxyServer();
 let app = express();
 let auth = require('./controllers/auth');
+let storeController = require('./controllers/store');
 let checkAuthenticated = require('./services/checkAuthenticated');
 let cors = require('./services/cors');
 
@@ -53,6 +54,8 @@ mongoose.connection.on('disconnected', function () {
 app.post('/auth/register', auth.register);
 app.post('/auth/login', auth.login);
 
+// Handle Stores Requests
+app.post('/api/add-store', storeController.addStore);
 
 let expressJwt = require('express-jwt');
 app.use('/private/*', expressJwt({secret: 'superSecret'}));

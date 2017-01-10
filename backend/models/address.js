@@ -34,7 +34,7 @@ let addressSchema = new Schema({
     state: {
         type: String,
         trim: true,
-        default: ''
+        default: 'Telangana'
     },
     telephone: {
         type: Number,
