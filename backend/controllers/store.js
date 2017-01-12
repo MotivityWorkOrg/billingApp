@@ -1,5 +1,6 @@
 let Store = require('../models/store');
 let Address = require('../models/address');
+let StoreStaticData = require('../staticDB/storeData');
 let console = require('console');
 
 module.exports = {
@@ -33,9 +34,29 @@ module.exports = {
                     return handleError(res, err)
                 }
                 if (!stores) {
+                    console.log("falskfjlasf");
                     return res.send(404);
                 }
-                console.log(" coming stores ", stores);
+                if (stores.length === 0) {
+                    let storeInfo = StoreStaticData.getStoreDetails();
+                    let add = StoreStaticData.getStoreAddress();
+                    let address = new Address(add);
+                    address.save((err, address) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        storeInfo.storeAddress = address;
+                        console.log(" coming stores ", storeInfo);
+                        let store = new Store(storeInfo);
+                        store.save((err, store) => {
+                            if (err) {
+                                console.log("store save error");
+                            }
+                            stores = store;
+                        })
+                    })
+                }
+                //console.log(" coming stores ", storeInfo);
                 return res.send(stores);
             })
     }

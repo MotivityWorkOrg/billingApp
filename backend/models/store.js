@@ -12,17 +12,16 @@ let storeSchema = new mongoose.Schema({
     storeAddress: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Address",
-        //required: 'store address is required'
-        default: null
+        required: 'store address is required'
     },
     telephone: {
-        type: Number,
+        type: String,
         required: 'Please enter valid telephone number',
         maxLength: Number(10)
     },
     user: {
         type: String,
-        required: 'Username is Required'
+        default: null
     },
     update: {
         type: Date,

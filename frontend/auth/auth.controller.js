@@ -3,7 +3,7 @@ AuthController.$inject = ['$scope', '$auth', '$rootScope', 'localCache', 'billin
 function AuthController($scope, $auth, $rootScope, localCache, billingService) {
     $scope.data = {};
     $scope.data.rolesOptions = [{id: 1, name: "USER"}, {id: 2, name: 'ADMIN'}];
-    $scope.data.stores = billingService.getStores((data) => {
+    billingService.getStores((data) => {
         $scope.data.stores = data;
         console.log($scope.data.stores);
     });

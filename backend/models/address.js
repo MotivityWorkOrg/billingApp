@@ -23,7 +23,7 @@ let addressSchema = new Schema({
         default: ''
     },
     pinCode: {
-        type: Number,
+        type: String,
         rim: true,
         maxLength: Number(6),
         default: ''
