@@ -56,6 +56,7 @@ app.post('/auth/login', auth.login);
 
 // Handle Stores Requests
 app.post('/api/add-store', storeController.addStore);
+app.get('/api/stores', storeController.getAllStores);
 
 let expressJwt = require('express-jwt');
 app.use('/private/*', expressJwt({secret: 'superSecret'}));

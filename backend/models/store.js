@@ -1,20 +1,39 @@
 let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
 
 let storeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     },
-    storeLocation: {
-        type: mongoose.Schema.ObjectId,
+    contactName: {
+        type: String,
+        required: true
+    },
+    storeAddress: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Address",
-        required: 'store address is required'
+        //required: 'store address is required'
+        default: null
+    },
+    telephone: {
+        type: Number,
+        required: 'Please enter valid telephone number',
+        maxLength: Number(10)
     },
     user: {
-        type: mongoose.Schema.ObjectId,
-        ref: "User"
+        type: String,
+        required: 'Username is Required'
+    },
+    update: {
+        type: Date,
+        default: null
+    },
+    create: {
+        type: Date,
+        default: Date.now
     }
+}, {
+    versionKey: false
 });
 
 module.exports = mongoose.model("Store", storeSchema);

@@ -13,7 +13,8 @@ import navBar from './components/navbar/navbar.html';
 import RestrictedDirective from './directives/restricted.directive';
 import LocalCache from './services/localCache.factory';
 import {StoreController} from './components/stores/store.controller';
-import {BillingService} from './services/billing-service';
+import {BillingService} from './services/billing.service';
+import MongooseErrorDirective from './directives/mongoose-error.directive';
 //import uiBootstrap from './lib/angular-ui/build/angular-ui.min';
 
 angular.module('billing-app', [uiRouter, satellizer])
@@ -23,8 +24,9 @@ angular.module('billing-app', [uiRouter, satellizer])
     .config(config)
     .service('billingService', BillingService)
     .factory('localCache', LocalCache)
-    .directive('compareTo', CompareToDirective)
     .controller('NavBarController', NavBarController)
     .controller('StoreController', StoreController)
     .component('navBar', {template: navBar})
-    .directive('restricted', RestrictedDirective);
+    .directive('compareTo', CompareToDirective)
+    .directive('restricted', RestrictedDirective)
+    .directive('mongooseError', MongooseErrorDirective);

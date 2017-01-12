@@ -32,7 +32,13 @@ let config = {
         filename: 'bundle.js'
     },
     module: {
-
+        preLoaders: [
+            {
+                test: /\.js$/, // include .js files
+                exclude: /node_modules/, // exclude any and all files in the node_modules folder
+                loader: "jshint-loader"
+            }
+        ],
         loaders: [
             {
                 test: /\.js$/,
@@ -52,11 +58,11 @@ let config = {
                 /*path: assetsPath,
                  filename: 'styles.less'*/
             },
-           /* {
-                test: /\.scss$/,
-                //loader: 'style!css!sass'
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader!scss-loader")
-            },*/
+            /* {
+             test: /\.scss$/,
+             //loader: 'style!css!sass'
+             loader: ExtractTextPlugin.extract("style-loader", "css-loader!scss-loader")
+             },*/
             {
                 test: /\.(woff|woff2|eot|ttf)$/,
                 loader: 'url-loader?limit=100000'
@@ -83,7 +89,25 @@ let config = {
         // We have to manually add the Hot Replacement plugin when running
         // from Node
         new Webpack.HotModuleReplacementPlugin()
-    ]
+    ],
+    jshint: {
+        // any jshint option http://www.jshint.com/docs/options/
+        // i. e.
+        camelcase: true,
+
+        // jshint errors are displayed by default as warnings
+        // set emitErrors to true to display them as errors
+        emitErrors: false,
+
+        // jshint to not interrupt the compilation
+        // if you want any file with jshint errors to fail
+        // set failOnHint to true
+        failOnHint: false,
+
+        // custom reporter function
+        reporter: function (errors) {
+        }
+    }
 };
 
 module.exports = config;

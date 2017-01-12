@@ -5,7 +5,7 @@ export class NavBarController{
         //this.isAthenticated = $auth.isAthenticated;
         this.isAthenticated = true;
         this.user = JSON.parse(localCache.getUser('loggedUser'));
-        console.log(this.user);
+        //console.log(this.user);
     }
     
     logout(){
