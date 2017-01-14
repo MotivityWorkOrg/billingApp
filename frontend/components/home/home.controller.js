@@ -4,6 +4,8 @@ export class HomeController {
         this.mainService = mainService;
         this.$http = $http;
         this.getData();
+        this.selectedItems = [];
+        this.orderPrice = 0.0;
     }
 
     getData() {
@@ -12,5 +14,17 @@ export class HomeController {
         itemService.then((res) => {
             self.items = res.data;
         });
+    }
+
+    prepareOrder(item) {
+        let self = this;
+        //self.selectedItems = [];
+        self.selectedItems.push(item);
+        self.orderPrice = 0.0;
+        self.selectedItems.forEach((data) => {
+            data.numberOfOrders = 1;
+            self.orderPrice += Number(data.price);
+        });
+        console.log(item);
     }
 }

@@ -1,9 +1,10 @@
 export class StoreController {
-    constructor($scope, billingService, localCache) {
+    constructor($scope, billingService, localCache, $log) {
         'ngInject';
         this.$scope = $scope;
         this.billingService = billingService;
         this.localCache = localCache;
+        this.$log = $log;
     }
 
     createStore(form, store) {
@@ -11,14 +12,20 @@ export class StoreController {
         self.submitted = true;
         if (form.$valid) {
             //console.log('Coming in add Store', store);
-            let loggedUser= JSON.parse(this.localCache.getUser('loggedUser'));
+            let loggedUser = JSON.parse(this.localCache.getUser('loggedUser'));
             store.user = loggedUser.username;
-            this.billingService.addStore(store);
+            let storeData = this.billingService.addStore(store);
+            storeData.then((res) => {
+                self.store = {};
+                this.$log.log(res);
+            }).catch((err) => {
+                this.$log.error(err);
+            });
         }
     }
 
     refresh() {
-        console.log("coming here");
+        this.$log.log("coming here");
         this.$scope.store = {};
     }
 }

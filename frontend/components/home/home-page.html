@@ -1,7 +1,7 @@
 <nav-bar></nav-bar>
 <div class="container" ng-controller="HomeController as home">
     <div id="products" class="row list-group">
-        <div class="item col-sm-2" ng-repeat="item in home.items">
+        <div class="item col-sm-2" ng-repeat="item in home.items" ng-click="home.prepareOrder(item)">
             <div class="thumbnail">
                 <img class="group list-group-image" ng-src="{{item.imageStream}}" alt=""/>
                 <div class="caption">
@@ -13,6 +13,35 @@
                     </h4>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <div id="orderProducts" class="row list-group">
+        <div class="item col-sm-2" ng-repeat="orderItem in home.selectedItems">
+            <div class="thumbnail">
+                <img class="group list-group-image" ng-src="{{orderItem.imageStream}}" alt=""/>
+                <div class="caption">
+                    <h4 class="group center-block list-group-item-heading">
+                        {{orderItem.itemName}}
+                    </h4>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label class="col-sm-9 ">
+                                Price: {{orderItem.price}} x
+                            </label>
+                            <input class="col-sm-6" type="number" ng-maxlength="2" ng-model="orderItem.numberOfOrders"
+                                   />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="group">
+            <label><strong>{{home.orderPrice}}</strong></label>
         </div>
     </div>
 </div>

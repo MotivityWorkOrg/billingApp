@@ -18,6 +18,7 @@ import {ItemController} from './components/items/item.controller';
 import FileUploadDirective from './directives/fileUpload.directive';
 import MainFactory from './services/mainb.factory';
 import {HomeController} from './components/home/home.controller';
+import NumberOnlyDirective from './directives/numberOnly.directive';
 
 angular.module('billing-app', [uiRouter, satellizer])
     .constant('API_URL', 'http://localhost:3000/')
@@ -35,4 +36,5 @@ angular.module('billing-app', [uiRouter, satellizer])
     .directive('compareTo', CompareToDirective)
     .directive('restricted', RestrictedDirective)
     .directive('mongooseError', MongooseErrorDirective)
-    .directive('fileUpload', FileUploadDirective);
+    .directive('fileUpload', FileUploadDirective)
+    .directive('numberOnly', NumberOnlyDirective);

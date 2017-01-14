@@ -2,14 +2,14 @@
 function AuthController($scope, $auth, $rootScope, localCache, billingService) {
     $scope.data = {};
     $scope.data.rolesOptions = [{id: 1, name: "USER"}, {id: 2, name: 'ADMIN'}];
-    billingService.getStores((data) => {
-        $scope.data.stores = data;
-        console.log($scope.data.stores);
+    let savedStores = billingService.getStores();
+    savedStores.then((res) => {
+        $scope.data.stores = res.data;
     });
-    $scope.register = function (form) {
+    $scope.register = function (form, user) {
         $scope.submitted = true;
         if (form.$valid) {
-            $auth.signup(form).then(function (res) {
+            $auth.signup(user).then(function (res) {
                 if (res.status === 200) {
                     window.location.href = '/';
                 }
