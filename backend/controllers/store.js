@@ -1,7 +1,13 @@
+'use strict';
 let Store = require('../models/store');
 let Address = require('../models/address');
 let StoreStaticData = require('../staticDB/storeData');
 let console = require('console');
+
+
+function handleError(res, err) {
+    return res.send(500, err);
+}
 
 module.exports = {
     addStore: function (req, res) {
@@ -21,17 +27,16 @@ module.exports = {
                     res.send(err.message);
                 }
                 res.send(store);
-            })
+            });
         });
     },
     getAllStores: function (req, res) {
-        Store.find({}).sort(
-            {
+        Store.find({}).sort({
                 create: -1
             })
             .exec(function (err, stores) {
                 if (err) {
-                    return handleError(res, err)
+                    return handleError(res, err);
                 }
                 if (!stores) {
                     console.log("falskfjlasf");
@@ -53,15 +58,12 @@ module.exports = {
                                 console.log("store save error");
                             }
                             stores = store;
-                        })
-                    })
+                        });
+                    });
                 }
                 //console.log(" coming stores ", storeInfo);
                 return res.send(stores);
-            })
+            });
     }
 };
 
-function handleError(res, err) {
-    return res.send(500, err);
-}

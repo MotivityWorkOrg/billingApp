@@ -1,5 +1,4 @@
-AuthController.$inject = ['$scope', '$auth', '$rootScope', 'localCache', 'billingService'];
-
+'use strict';
 function AuthController($scope, $auth, $rootScope, localCache, billingService) {
     $scope.data = {};
     $scope.data.rolesOptions = [{id: 1, name: "USER"}, {id: 2, name: 'ADMIN'}];
@@ -31,7 +30,7 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService) {
             });
         }
 
-    }
+    };
 }
-
+AuthController.$inject = ['$scope', '$auth', '$rootScope', 'localCache', 'billingService'];
 export default AuthController;

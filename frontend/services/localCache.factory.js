@@ -1,3 +1,4 @@
+'use strict';
 function LocalCache($window) {
 
     return {
@@ -11,4 +12,4 @@ function LocalCache($window) {
     };
 }
 
-export default ['$window', '$rootScope', LocalCache]
+export default ['$window', '$rootScope', LocalCache];

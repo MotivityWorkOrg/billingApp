@@ -1,2 +1,92 @@
 <nav-bar></nav-bar>
+<div class="center-block" ng-controller="ItemController as itemCtrl"
+     style="border: 2px solid #083858; border-radius: 8px; width: 450px; padding: 0 10px 20px 20px;">
+    <h1 class="text-center" style="color: #083858;">Add New Items</h1>
 
+    <form class="form" name="form" novalidate>
+        <div class="form-group" ng-class="{ 'has-success': form.category.$valid && itemCtrl.submitted,
+                                          'has-error': form.category.$invalid && itemCtrl.submitted }">
+            <label style="color: #083858;">Category Name</label>
+
+            <input type="text" name="category" placeholder="Enter Category" class="form-control"
+                   ng-model="item.category"
+                   required/>
+            <p class="help-block" ng-show="form.category.$error.required && itemCtrl.submitted">
+                A category is required
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.subCat.$valid && itemCtrl.submitted,
+                                          'has-error': form.subCat.$invalid && itemCtrl.submitted }">
+            <label style="color: #083858;">Sub Category</label>
+
+            <input type="text" name="subCat" placeholder="Enter SubCategory" class="form-control"
+                   ng-model="item.subCategory"
+                   required/>
+            <p class="help-block" ng-show="form.subCat.$error.required && itemCtrl.submitted">
+                Sub category is required
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success':form.desc.$valid && itemCtrl.submitted,
+                                          'has-error': form.desc.$invalid && itemCtrl.submitted }">
+            <label style="color: #083858;">Description</label>
+            <input type="text" name="desc" placeholder="Description" class="form-control"
+                   ng-model="item.description"
+                   required
+                   mongoose-error/>
+            <p class="help-block" ng-show="form.desc.$error.required && itemCtrl.submitted">
+                provide valid Description
+            </p>
+            <p class="help-block" ng-show="form.address1.$error.mongoose">
+                {{ errors.address.address1 }}
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && itemCtrl.submitted,
+                                          'has-error': form.name.$invalid && itemCtrl.submitted }">
+            <label style="color: #083858;">Item Name</label>
+
+            <input type="text" name="name" placeholder="Enter Item Name" class="form-control"
+                   ng-model="item.itemName"
+                   required/>
+            <p class="help-block" ng-show="form.name.$error.required && itemCtrl.submitted">
+                A item name is required
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.cost.$valid && itemCtrl.submitted,
+                                          'has-error': form.city.$invalid && itemCtrl.submitted }">
+            <label style="color: #083858;">Price</label>
+
+            <input type="text" name="cost" placeholder="Enter cost" class="form-control"
+                   ng-model="item.price"
+                   required
+                   mongoose-error/>
+            <p class="help-block" ng-show="form.city.$error.mongoose">
+                {{ errors.item.price}}
+            </p>
+        </div>
+        <div class="form-group">
+            <label style="color: #083858;">Item Code</label>
+
+            <input type="text" name="code" placeholder="Enter State" class="form-control"
+                   ng-model="item.itemCode"/>
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.fileInput.$valid && itemCtrl.submitted,
+                                          'has-error': form.fileInput.$invalid && itemCtrl.submitted }">
+            <input type="file" name="fileInput" id="fileInput" multiple="multiple" accept="image/*"
+                   ng-model="item.imageStream" class="form-control" file-upload/>
+
+            <img ng-repeat="image in item.imageStream" ng-src="{{image}}" width="100" />
+            <!--  Multiple files
+             <div class="button" ngf-select ng-model="up.files" ngf-multiple="true">Select</div>
+             Drop files: <div ngf-drop ng-model="up.files" class="drop-box">Drop</div> -->
+
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit" ng-click="itemCtrl.createItem(form, item)">
+                Add
+            </button>
+            <button class="btn btn-danger" type="submit" ng-click="itemCtrl.refresh()">
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>

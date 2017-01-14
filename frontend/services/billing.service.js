@@ -10,14 +10,22 @@ export class BillingService {
             return res.data;
         }).catch((error) => {
             this.$log.error("something went wrong ", error);
-        })
+        });
     }
 
     getStores() {
         this.$http.get('/api/stores').then((res) => {
             return res.data;
         }).catch((err) => {
-            this.$log.error("something went wrong  ", err)
-        })
+            this.$log.error("something went wrong  ", err);
+        });
+    }
+
+    addItem(item) {
+        this.$http.post('/api/add-item', item).then((res) => {
+            return res;
+        }).catch((err) => {
+            this.$log.error(" Somthing went wrong ", err);
+        });
     }
 }

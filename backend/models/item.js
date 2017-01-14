@@ -2,6 +2,21 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let itemSchema = new Schema({
+    category: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    subCategory: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+    description: {
+        type: String,
+        trim: true,
+        required: true,
+    },
     itemName: {
         type: String,
         trim: true,
@@ -15,12 +30,21 @@ let itemSchema = new Schema({
     },
     itemCode: {
         type: String,
-        required: true
+        default: null
+
     },
-    path: {
+    imageStream: {
         type: String,
         required: true,
         trim: true
+    },
+    create: {
+        type: Date,
+        default: Date.now
+    },
+    update: {
+        type: Date,
+        default: null
     }
 });
 

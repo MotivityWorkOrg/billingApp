@@ -1,6 +1,5 @@
 require('./reset.less');
 import './lib/bootstrap/dist/css/bootstrap.css';
-//require('./lib/angular-ui/common/stylesheets/angular-ui.less');
 import angular from './lib/angular';
 import uiRouter from './lib/angular-ui-router/release/angular-ui-router.min';
 import MainCtrl from './main/main.controller.js';
@@ -15,7 +14,10 @@ import LocalCache from './services/localCache.factory';
 import {StoreController} from './components/stores/store.controller';
 import {BillingService} from './services/billing.service';
 import MongooseErrorDirective from './directives/mongoose-error.directive';
-//import uiBootstrap from './lib/angular-ui/build/angular-ui.min';
+import {ItemController} from './components/items/item.controller';
+import FileUploadDirective from './directives/fileUpload.directive';
+import MainFactory from './services/mainb.factory';
+import {HomeController} from './components/home/home.controller';
 
 angular.module('billing-app', [uiRouter, satellizer])
     .constant('API_URL', 'http://localhost:3000/')
@@ -24,9 +26,13 @@ angular.module('billing-app', [uiRouter, satellizer])
     .config(config)
     .service('billingService', BillingService)
     .factory('localCache', LocalCache)
+    .factory('mainService', MainFactory)
     .controller('NavBarController', NavBarController)
     .controller('StoreController', StoreController)
+    .controller('ItemController', ItemController)
+    .controller('HomeController', HomeController)
     .component('navBar', {template: navBar})
     .directive('compareTo', CompareToDirective)
     .directive('restricted', RestrictedDirective)
-    .directive('mongooseError', MongooseErrorDirective);
+    .directive('mongooseError', MongooseErrorDirective)
+    .directive('fileUpload', FileUploadDirective);

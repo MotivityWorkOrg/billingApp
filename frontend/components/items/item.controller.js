@@ -1,8 +1,23 @@
+export class ItemController {
+    constructor( billingService) {
+        'ngInject';
+        this.billingService = billingService;
+    }
 
-ItemController.$inject = ['$scope'];
-function ItemController($scope) {
-    //console.log($scope, ' :: --- :: ');
+    createItem(form, item) {
+        console.log(item);
+        if(form.$valid){
+            this.billingService.addItem(item);
+        }
+    }
+
+    refresh() {
+        let self = this;
+        self.item = {};
+    }
+
+    imageChange(image){
+        console.log(image);
+    }
 }
-
-export default ItemController;
 

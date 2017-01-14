@@ -1,16 +1,16 @@
 <nav-bar></nav-bar>
-<div class="container">
+<div class="container" ng-controller="HomeController as home">
     <div id="products" class="row list-group">
-        <div class="item  col-xs-4 col-lg-4">
+        <div class="item col-sm-2" ng-repeat="item in home.items">
             <div class="thumbnail">
-                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" />
+                <img class="group list-group-image" ng-src="{{item.imageStream}}" alt=""/>
                 <div class="caption">
-                    <h4 class="group inner list-group-item-heading">
-                        Product title</h4>
-                    <p class="group inner list-group-item-text">
-                        Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
-                        sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                    </p>
+                    <h4 class="group center-block list-group-item-heading">
+                        {{item.itemName}}
+                    </h4>
+                    <h4 class="group center-block list-group-item-heading">
+                        {{item.price}}
+                    </h4>
                 </div>
             </div>
         </div>

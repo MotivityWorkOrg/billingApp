@@ -14,7 +14,7 @@ function CompareToDirective() {
                 ngModel.$validate();
             });
         }
-    }
+    };
 }
 
 export default CompareToDirective;

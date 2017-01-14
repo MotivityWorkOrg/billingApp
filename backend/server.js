@@ -1,3 +1,4 @@
+'use strict';
 let express = require('express');
 let path = require('path');
 let console = require('console');
@@ -11,7 +12,8 @@ let proxy = httpProxy.createProxyServer();
 let app = express();
 let auth = require('./controllers/auth');
 let storeController = require('./controllers/store');
-let checkAuthenticated = require('./services/checkAuthenticated');
+//let checkAuthenticated = require('./services/checkAuthenticated');
+let itemController = require('./controllers/item');
 let cors = require('./services/cors');
 
 // uncomment after placing your favicon in /public
@@ -58,6 +60,9 @@ app.post('/auth/login', auth.login);
 app.post('/api/add-store', storeController.addStore);
 app.get('/api/stores', storeController.getAllStores);
 
+// Handle Items
+app.post('/api/add-item', itemController.addItem);
+app.get('/api/items', itemController.getItems);
 let expressJwt = require('express-jwt');
 app.use('/private/*', expressJwt({secret: 'superSecret'}));
 
@@ -135,6 +140,5 @@ app.use(function (err, req, res, next) {
     });
     console.log(next);
 });
-
 
 module.exports = app;
