@@ -1,6 +1,7 @@
+'use strict';
+
 import AuthController from './auth/auth.controller';
 import ItemController from './components/items/item.controller';
-import {StoreController} from './components/stores/store.controller';
 
 function config($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);

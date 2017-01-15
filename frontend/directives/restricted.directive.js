@@ -1,8 +1,7 @@
-//RestrictedDirective.$inject = ['$rootScope'];
-
-function RestrictedDirective(localCache) {
+'use strict';
+function RestrictedDirective() {
     'ngInject';
-    return{
+    return {
         restrict: 'A',
         link: function (scope, elem) {
             let isAuthorized = scope.nav.user.role === 'ADMIN';
@@ -10,7 +9,7 @@ function RestrictedDirective(localCache) {
                 elem.css('display', 'none');
             }
         }
-    }
+    };
 }
 
-export default ['$rootScope', 'localCache', RestrictedDirective];
+export default [RestrictedDirective];
