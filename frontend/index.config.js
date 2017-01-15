@@ -1,4 +1,5 @@
 'use strict';
+
 export function config($logProvider, $authProvider, API_URL) {
     'ngInject';
     // Enable log

@@ -1,6 +1,4 @@
 'use strict';
-let User = require('../models/user');
-let console = require('console');
 
 function getPermissions(role) {
     if (role === 'ADMIN') {
@@ -8,6 +6,9 @@ function getPermissions(role) {
     }
     return ['items', 'orders'];
 }
+
+let User = require('../models/user');
+let console = require('console');
 
 module.exports = {
     login: function (req, res) {
