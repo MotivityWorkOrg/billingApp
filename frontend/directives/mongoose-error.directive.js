@@ -14,7 +14,7 @@ function MongooseErrorDirective() {
                 return ngModel.$setValidity('mongoose', true);
             });
         }
-    }
+    };
 }
 
 export default MongooseErrorDirective;

@@ -1,6 +1,5 @@
 'use strict';
 function MainFactory($http) {
-
     return {
         getItems: function () {
             let allItems = $http.get('/api/items');

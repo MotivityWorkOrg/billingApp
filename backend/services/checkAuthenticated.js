@@ -1,3 +1,4 @@
+'use strict';
 let jwt = require('jsonwebtoken');
 let moment = require('moment');
 

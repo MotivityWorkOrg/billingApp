@@ -95,18 +95,18 @@ let config = {
         // i. e.
         camelcase: true,
 
-        // jshint errors are displayed by default as warnings
+        // jshint: errors are displayed by default as warnings
         // set emitErrors to true to display them as errors
         emitErrors: false,
 
-        // jshint to not interrupt the compilation
+        // jshint: to not interrupt the compilation
         // if you want any file with jshint errors to fail
         // set failOnHint to true
         failOnHint: false,
 
-        // custom reporter function
-        reporter: function (errors) {
-        }
+        // custom reporter function -- uncomment it use for custom errors
+       /* reporter: function (errors) {
+        }*/
     }
 };
 

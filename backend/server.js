@@ -12,7 +12,7 @@ let proxy = httpProxy.createProxyServer();
 let app = express();
 let auth = require('./controllers/auth');
 let storeController = require('./controllers/store');
-//let checkAuthenticated = require('./services/checkAuthenticated');
+let checkAuthenticated = require('./services/checkAuthenticated');
 let itemController = require('./controllers/item');
 let cors = require('./services/cors');
 
@@ -57,7 +57,7 @@ app.post('/auth/register', auth.register);
 app.post('/auth/login', auth.login);
 
 // Handle Stores Requests
-app.post('/api/add-store', storeController.addStore);
+app.post('/api/add-store', checkAuthenticated, storeController.addStore);
 app.get('/api/stores', storeController.getAllStores);
 
 // Handle Items

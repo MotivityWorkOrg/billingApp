@@ -2,7 +2,6 @@ require('./reset.less');
 import './lib/bootstrap/dist/css/bootstrap.css';
 import angular from './lib/angular';
 import uiRouter from './lib/angular-ui-router/release/angular-ui-router.min';
-import MainCtrl from './main/main.controller.js';
 import appRouter from './index.route.js';
 import CompareToDirective from './directives/compareTo.directive';
 import config from './index.config';
@@ -19,10 +18,10 @@ import FileUploadDirective from './directives/fileUpload.directive';
 import MainFactory from './services/mainb.factory';
 import {HomeController} from './components/home/home.controller';
 import NumberOnlyDirective from './directives/numberOnly.directive';
+import OrderCountDirective from './directives/oderCount.directive';
 
 angular.module('billing-app', [uiRouter, satellizer])
     .constant('API_URL', 'http://localhost:3000/')
-    .controller('MainCtrl', MainCtrl)
     .config(appRouter)
     .config(config)
     .service('billingService', BillingService)
@@ -37,4 +36,5 @@ angular.module('billing-app', [uiRouter, satellizer])
     .directive('restricted', RestrictedDirective)
     .directive('mongooseError', MongooseErrorDirective)
     .directive('fileUpload', FileUploadDirective)
-    .directive('numberOnly', NumberOnlyDirective);
+    .directive('numberOnly', NumberOnlyDirective)
+    .directive('orderCount', OrderCountDirective);

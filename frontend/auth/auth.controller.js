@@ -29,7 +29,6 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService) {
                 }
             });
         }
-
     };
 }
 AuthController.$inject = ['$scope', '$auth', '$rootScope', 'localCache', 'billingService'];

@@ -1,7 +1,11 @@
 <nav-bar></nav-bar>
 <div class="container" ng-controller="HomeController as home">
+    <div class="alert alert-danger" ng-show="home.itemInCart" role="alert">
+        <strong>Item already exist!</strong> {{home.errorMessage}}
+    </div>
     <div id="products" class="row list-group">
-        <div class="item col-sm-2" ng-repeat="item in home.items" ng-click="home.prepareOrder(item)">
+        <div class="item col-sm-2" ng-repeat="item in home.items track by (item._id + $index)"
+             ng-click="home.prepareOrder(item)">
             <div class="thumbnail">
                 <img class="group list-group-image" ng-src="{{item.imageStream}}" alt=""/>
                 <div class="caption">
@@ -16,11 +20,10 @@
         </div>
     </div>
 
-    <br/>
-    <br/>
+    <hr style="height:1px;border:none;color:#333;background-color:#333;"/>
 
     <div id="orderProducts" class="row list-group">
-        <div class="item col-sm-2" ng-repeat="orderItem in home.selectedItems">
+        <div class="item col-sm-2" ng-repeat="orderItem in home.selectedItems track by (orderItem._id + $index)">
             <div class="thumbnail">
                 <img class="group list-group-image" ng-src="{{orderItem.imageStream}}" alt=""/>
                 <div class="caption">
@@ -29,14 +32,16 @@
                     </h4>
                     <div class="form-inline">
                         <div class="form-group">
-                            <label class="col-sm-9 ">
+                            <label class="col-sm-9 order-price-text">
                                 Price: {{orderItem.price}} x
                             </label>
-                            <input class="col-sm-6" type="number" ng-maxlength="2" ng-model="orderItem.numberOfOrders"
-                                   />
+                            <input class="col-sm-3 order-text" title="orderTI" type="number" ng-maxlength="2"
+                                   ng-model="orderItem.numberOfOrders" order-count/>
+                            <button class="col-sm-4 btn btn-danger order-del"
+                                    ng-click="home.itemCountChanged(orderItem)">Del
+                            </button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

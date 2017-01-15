@@ -1,3 +1,4 @@
+'use strict';
 export class BillingService {
     constructor($log, $http) {
         'ngInject';

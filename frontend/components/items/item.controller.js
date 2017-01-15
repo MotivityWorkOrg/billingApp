@@ -8,7 +8,6 @@ export class ItemController {
     createItem(form) {
         let self = this;
         let item = self.item;
-        console.log(item);
         self.submitted = true;
         if (form.$valid) {
             let storeItem = this.billingService.addItem(item);

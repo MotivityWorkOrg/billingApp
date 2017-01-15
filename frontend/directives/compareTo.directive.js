@@ -1,4 +1,5 @@
 //ComparePassword.$inject = ['$parse'];
+'use strict';
 function CompareToDirective() {
     return {
         require: 'ngModel',

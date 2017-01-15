@@ -1,6 +1,5 @@
 'use strict';
 function LocalCache($window) {
-
     return {
         setUser: function (val) {
             $window.localStorage && $window.localStorage.setItem('loggedUser', val);

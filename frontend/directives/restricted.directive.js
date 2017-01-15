@@ -1,6 +1,7 @@
+'use strict';
 //RestrictedDirective.$inject = ['$rootScope'];
 
-function RestrictedDirective(localCache) {
+function RestrictedDirective() {
     'ngInject';
     return{
         restrict: 'A',
@@ -10,7 +11,7 @@ function RestrictedDirective(localCache) {
                 elem.css('display', 'none');
             }
         }
-    }
+    };
 }
 
-export default ['$rootScope', 'localCache', RestrictedDirective];
+export default RestrictedDirective;
