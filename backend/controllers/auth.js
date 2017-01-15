@@ -1,6 +1,15 @@
-let express = require('express');
+'use strict';
+
+function getPermissions(role) {
+    if (role === 'ADMIN') {
+        return ['stores', 'update-profile', 'user-update', 'items', 'orders'];
+    }
+    return ['items', 'orders'];
+}
+
 let User = require('../models/user');
 let console = require('console');
+
 module.exports = {
     login: function (req, res) {
         //console.log(req.body);
@@ -43,10 +52,3 @@ module.exports = {
         }
     }
 };
-
-function getPermissions(role) {
-    if (role === 'ADMIN') {
-        return ['stores', 'update-profile', 'user-update', 'items', 'orders']
-    }
-    return ['items', 'orders'];
-}
