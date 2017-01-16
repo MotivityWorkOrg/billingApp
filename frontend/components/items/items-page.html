@@ -7,10 +7,13 @@
         <div class="form-group" ng-class="{ 'has-success': form.category.$valid && itemCtrl.submitted,
                                           'has-error': form.category.$invalid && itemCtrl.submitted }">
             <label style="color: #083858;">Category Name</label>
-
-            <input type="text" name="category" placeholder="Enter Category" class="form-control"
+            <select name="category" title="categoryDD" class="form-control" ng-model="itemCtrl.item.category">
+                <option disabled value="">Select Category</option>
+                <option ng-repeat="cat in itemCtrl.categoryArray" value="{{cat.name}}">{{cat.name}}</option>
+            </select>
+            <!--<input type="text" name="category" placeholder="Enter Category" class="form-control"
                    ng-model="itemCtrl.item.category"
-                   required/>
+                   required/>-->
             <p class="help-block" ng-show="form.category.$error.required && itemCtrl.submitted">
                 A category is required
             </p>

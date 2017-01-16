@@ -105,8 +105,8 @@ let config = {
         failOnHint: false,
 
         // custom reporter function -- uncomment it use for custom errors
-       /* reporter: function (errors) {
-        }*/
+        reporter: function () {
+        }
     }
 };
 

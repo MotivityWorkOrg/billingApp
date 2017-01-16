@@ -3,6 +3,9 @@ export class ItemController {
         'ngInject';
         this.billingService = billingService;
         this.$log = $log;
+        this.categoryArray = [{id: 1, name: 'JumboKing'}, {id: 2, name: 'Sandwich'}, {id: 3, name: 'Sides'},
+            {id: 4, name: 'Beverages'}];
+        //this.subCategoryArray = [];
     }
 
     createItem(form) {

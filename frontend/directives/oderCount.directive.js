@@ -10,9 +10,11 @@ function OrderCountDirective($log) {
             ele.bind("keyup", (event) => {
                 if ((event.keyCode > 47 && event.keyCode < 58) || (event.keyCode > 95 && event.keyCode < 104)) {
                     let editedItemPrice = Number(selectedOrder.price);
+                    let revisedItemOrderAmount = editedItemPrice * (parseInt(event.key) - 1);
+                    let oderTotalPrice = revisedItemOrderAmount + homeController.orderPrice;
                     homeController.orderPrice = homeController.orderPrice - editedItemPrice;
                     scope.$apply(() => {
-                        homeController.orderPrice = editedItemPrice * parseInt(event.key);
+                        homeController.orderPrice = oderTotalPrice;
                         homeController.itemInCart = false;
                     });
                 }

@@ -6,6 +6,29 @@ function handleError(res, err) {
     return res.send(500, err);
 }
 
+function getCategorized(items) {
+    let categoryArray = ['JumboKing', 'Sandwich', 'Sides', 'Beverages'];
+    items.forEach((data) => {
+        switch (data.category) {
+            case categoryArray[0] : {
+
+                break;
+            }
+            case categoryArray[1]: {
+
+                break;
+            }
+            case categoryArray[2]: {
+
+                break;
+            }
+            case  categoryArray[3]: {
+
+            }
+        }
+    });
+}
+
 module.exports = {
     addItem: function (req, res) {
         let item = new Item(req.body);
@@ -29,7 +52,7 @@ module.exports = {
                 console.log("falskfjlasf");
                 return res.send(404);
             }
-            //console.log(" coming stores ", items);
+            //items = getCategorized(items);
             return res.send(items);
         });
     }
