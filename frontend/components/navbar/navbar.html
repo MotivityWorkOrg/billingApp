@@ -8,10 +8,10 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
             <ul class="nav navbar-nav">
-                <li class="active"><a ui-sref="home">Home</a></li>
-                <li restricted><a ui-sref="items">Items</a></li>
-                <li restricted><a ui-sref="stores">Stores</a> </li>
-                <li ng-show="nav.isAthenticated"><a ng-click="nav.logout()">Logout</a></li>
+                <li ng-class="{ active: nav.isActive('/home')}"><a ui-sref="home">Home</a></li>
+                <li ng-class="{ active: nav.isActive('/items')}" restricted><a ui-sref="items">Items</a></li>
+                <li ng-class="{ active: nav.isActive('/stores')}" restricted><a ui-sref="stores">Stores</a></li>
+                <li class="show-pointer" ng-show="nav.isAthenticated"><a ng-click="nav.logout()">Logout</a></li>
             </ul>
         </div>
     </div>

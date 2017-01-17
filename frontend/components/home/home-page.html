@@ -4,23 +4,28 @@
         <strong>Item already exist!</strong> {{home.errorMessage}}
     </div>
     <div id="products" class="row list-group">
-        <div class="item col-sm-2" ng-repeat="item in home.items track by (item._id + $index)"
-             ng-click="home.prepareOrder(item)">
-            <div class="thumbnail">
-                <img class="group list-group-image" ng-src="{{item.imageStream}}" alt=""/>
-                <div class="caption">
-                    <h4 class="group center-block list-group-item-heading">
-                        {{item.itemName}}
-                    </h4>
-                    <h4 class="group center-block list-group-item-heading">
-                        {{item.price}}
-                    </h4>
+        <div class="pull-left-div item col-sm-6" ng-repeat="item in home.items track by (item._id + $index)">
+            <label style="color: #083858;">{{item.name}}</label>
+            <br/>
+            <div class="item col-sm-4"
+                 ng-repeat="subItem in item.listItems track by (subItem._id + $index)"
+                 ng-click="home.prepareOrder(subItem)">
+                <div class="thumbnail">
+                    <img class="group list-group-image" ng-src="{{subItem.imageStream}}" alt=""/>
+                    <div class="caption">
+                        <h4 class="group center-block list-group-item-heading">
+                            {{subItem.itemName}}
+                        </h4>
+                        <h4 class="group center-block list-group-item-heading">
+                            {{subItem.price}}
+                        </h4>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <hr style="height:1px;border:none;color:#333;background-color:#333;"/>
+    <hr class="pull-left-div" style="height:1px;border:none;color:#333;background-color:#333;"/>
 
     <div id="orderProducts" class="row list-group">
         <div class="item col-sm-2" ng-repeat="orderItem in home.selectedItems track by (orderItem._id + $index)">

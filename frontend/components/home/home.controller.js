@@ -36,7 +36,6 @@ export class HomeController {
 
     itemCountChanged(item) {
         let self = this;
-        this.$log.log(item);
         let editedItemPrice = Number(item.price);
         self.orderPrice = self.orderPrice - (editedItemPrice * parseInt(item.numberOfOrders));
         let index = self.selectedItems.indexOf(item);
