@@ -54,7 +54,7 @@ mongoose.connection.on('disconnected', function () {
 });
 
 //Handle Requests
-app.post('/auth/register', auth.register);
+app.post('/auth/singup', auth.register);
 app.post('/auth/login', auth.login);
 
 // Handle Stores Requests

@@ -99,7 +99,7 @@
                                           'has-error': form.pwdConfirm.$invalid && submitted }">
             <label style="color: #083858;">Date of Birth</label>
             <div class="form-inline">
-                <select name="day" class="form-control" ng-model="user.day">
+                <select name="day" title="day" class="form-control" ng-model="user.day">
                     <option value="" disabled>Day</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -133,7 +133,7 @@
                     <option value="30">30</option>
                     <option value="31">31</option>
                 </select>
-                <select name="month" aria-label="month" class="form-control" ng-model="user.month">
+                <select name="month" title="month" class="form-control" ng-model="user.month">
                     <option disabled value="">Month</option>
                     <option value="1">Jan</option>
                     <option value="2">Feb</option>
@@ -148,7 +148,7 @@
                     <option value="11">Nov</option>
                     <option value="12">Dec</option>
                 </select>
-                <select name="year" aria-label="month" class="form-control" ng-model="user.year">
+                <select name="year" title="month" class="form-control" ng-model="user.year">
                     <option disabled value="">Year</option>
                     <option value="2017">2017</option>
                     <option value="2016">2016</option>
@@ -217,7 +217,7 @@
             </a>
         </div>
 
-        <hr>
+       <!-- <hr>
         <div>
             <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
                 <i class="fa fa-facebook"></i> Connect with Facebook
@@ -225,7 +225,7 @@
             <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
                 <i class="fa fa-twitter"></i> Connect with Twitter
             </a>
-        </div>
+        </div>-->
     </form>
 
 </div>

@@ -31,8 +31,7 @@ module.exports = {
         //req.check('username').isAlphanumeric(); // check to see if not empty
         console.log(req.body, '  ::::');
         let errors = req.validationErrors();
-        let user = {};
-        user = req.body;
+        let user = req.body;
         user.displayName = req.body.firstName + ' ' + req.body.lastName;
         console.log(req.body.year, req.body.month, req.body.day);
         user.dob = new Date(req.body.year, req.body.month - 1, req.body.day + 1);
