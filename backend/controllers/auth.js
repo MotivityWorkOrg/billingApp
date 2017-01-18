@@ -29,13 +29,14 @@ module.exports = {
     },
     register: function (req, res) {
         //req.check('username').isAlphanumeric(); // check to see if not empty
+        console.log(req.body, '  ::::');
         let errors = req.validationErrors();
         let user = {};
         user = req.body;
         user.displayName = req.body.firstName + ' ' + req.body.lastName;
-        //console.log(req.body.year, req.body.month, req.body.day);
+        console.log(req.body.year, req.body.month, req.body.day);
         user.dob = new Date(req.body.year, req.body.month - 1, req.body.day + 1);
-        console.log(user.dob, '  ::::');
+        console.log(req.body, '  ::::');
         if (errors) {
             res.status(400).send(errors);
         } else {

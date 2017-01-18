@@ -68,7 +68,7 @@ function NumberOnlyDirective() {
             };
             let change_maxLength = function (elem) {
                 try {
-                    let el = $(elem)[0];
+                    let el = (elem)[0];
                     if (el.value.indexOf('.') > -1) {
                         elem.data('maxLength', el.initMaxLength + toIncreaseMaxLengthBy(elem));
                     }

@@ -26,6 +26,17 @@ export class BillingService {
         return storedStored;
     }
 
+    passwordReset(email) {
+        console.log(email);
+        let password = this.$http.post('/forgot-password', email);
+        password.then((res) => {
+            return res.data;
+        }).catch((err) => {
+            this.$log.error("something went wrong  ", err);
+        });
+        return password;
+    }
+
     addItem(item) {
         let ItemStored = this.$http.post('/api/add-item', item);
         ItemStored.then((res) => {

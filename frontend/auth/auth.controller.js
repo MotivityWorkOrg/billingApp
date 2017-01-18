@@ -9,6 +9,12 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService) {
     $scope.register = function (form, user) {
         $scope.submitted = true;
         if (form.$valid) {
+            if($scope.store !== undefined){
+                user.stores = [];
+                user.stores.push($scope.store);
+                console.log($scope.store, " :: Getting Store");
+            }
+            console.log(user);
             $auth.signup(user).then(function (res) {
                 if (res.status === 200) {
                     window.location.href = '/';
@@ -27,6 +33,17 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService) {
                     localCache.setUser(JSON.stringify(res.data.user));
                     window.location.href = '/home';
                 }
+            });
+        }
+    };
+
+    $scope.reset = function (form) {
+        if(form.$valid){
+            let passReset = billingService.passwordReset($scope.user.email);
+            passReset.then((res) =>{
+                console.log(res);
+            }).catch((err) => {
+                console.log(err);
             });
         }
     };

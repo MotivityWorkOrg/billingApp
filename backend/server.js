@@ -13,6 +13,7 @@ let app = express();
 let auth = require('./controllers/auth');
 let storeController = require('./controllers/store');
 let checkAuthenticated = require('./services/checkAuthenticated');
+let passwordAPI = require('./controllers/forgotPassword');
 let itemController = require('./controllers/item');
 let cors = require('./services/cors');
 
@@ -63,6 +64,10 @@ app.get('/api/stores', storeController.getAllStores);
 // Handle Items
 app.post('/api/add-item', itemController.addItem);
 app.get('/api/items', itemController.getItems);
+
+// password reset
+app.post('/forgot-password', passwordAPI.changePassword);
+
 let expressJwt = require('express-jwt');
 app.use('/private/*', expressJwt({secret: 'superSecret'}));
 

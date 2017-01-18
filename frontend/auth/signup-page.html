@@ -196,14 +196,15 @@
              aria-describedby="js_be">
             <div class="form-inline">
                 <label style="color: #083858;">Role</label>
-                <select class="form-control" name="role" id="store" ng-model="user.role">
+                <select class="form-control" title="role-selection" name="role" id="store" ng-model="user.role">
                     <option disabled value="">Role</option>
                     <option ng-repeat="option in data.rolesOptions" value="{{option.name}}">{{option.name}}</option>
                 </select>
                 <label style="color: #083858;">Store</label>
-                <select class="form-control" name="store" id="storeSelect" ng-model="user.store">
+                <select class="form-control" title="store-selection" name="store" id="storeSelect"
+                        ng-model="store">
                     <option disabled value="">Store</option>
-                    <option ng-repeat="store in data.stores" value="{{store.id}}">{{store.name}}</option>
+                    <option ng-repeat="store in data.stores" value="{{store._id}}">{{store.name}}</option>
                 </select>
             </div>
         </div>

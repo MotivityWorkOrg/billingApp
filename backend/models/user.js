@@ -206,7 +206,7 @@ UserSchema.statics.Create = function (user, callback) {
             newUser.save(function (err) {
                 // In case of any error, return using the done method
                 if (err) {
-                    return callback(err);
+                    return callback(err.message);
                 }
                 // User Registration successful
                 return callback(null, newUser);
