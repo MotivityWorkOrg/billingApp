@@ -17,7 +17,7 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService, $
             console.log(user);
             $http.post('/auth/singup', user).then(function (res) {
                 if (res.status === 200) {
-                    //window.location.href = '/';
+                    window.location.href = '/';
                 }
             });
         }
