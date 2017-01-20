@@ -53,4 +53,11 @@ export class HomeController {
         }
         return notFound;
     }
+
+    printOrder(divName) {
+        let self = this;
+        console.log(self, " ::: ", ' ::: ', divName);
+        let printContents = document.getElementById(divName).innerHTML;
+        console.log(self, " ::: ", printContents, ' ::: ', divName);
+    }
 }

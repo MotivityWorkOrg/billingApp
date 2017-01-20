@@ -25,7 +25,7 @@ function config($stateProvider, $urlRouterProvider, $locationProvider) {
         })
         .state('forgotPassword', {
             url: '/forgotpassword',
-            template: require('./auth/forgotpassword.html'),
+            template: require('./auth/forgot-password.html'),
             controller: AuthController,
             controllerAs: 'auth',
             title: 'Forgot Password'

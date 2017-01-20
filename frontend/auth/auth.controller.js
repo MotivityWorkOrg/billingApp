@@ -9,7 +9,7 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService, $
     $scope.register = function (form, user) {
         $scope.submitted = true;
         if (form.$valid) {
-            if($scope.store !== undefined){
+            if ($scope.store !== undefined) {
                 user.stores = [];
                 user.stores.push($scope.store);
                 console.log($scope.store, " :: Getting Store");
@@ -25,9 +25,9 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService, $
     };
 
     $scope.login = function (form, user) {
+        $scope.submitted = true;
         if (form.$valid) {
             $auth.login(user).then(function (res) {
-                $scope.submitted = true;
                 if (res.status === 200) {
                     $auth.setToken(res.data.token);
                     localCache.setUser(JSON.stringify(res.data.user));
@@ -38,9 +38,10 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService, $
     };
 
     $scope.reset = function (form) {
-        if(form.$valid){
+        $scope.submitted = true;
+        if (form.$valid) {
             let passReset = billingService.passwordReset($scope.user.email);
-            passReset.then((res) =>{
+            passReset.then((res) => {
                 console.log(res);
             }).catch((err) => {
                 console.log(err);
