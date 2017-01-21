@@ -1,7 +1,6 @@
 'use strict';
 import AuthController from './auth/auth.controller';
 import ItemController from './components/items/item.controller';
-import {StoreController} from './components/stores/store.controller';
 
 function config($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
@@ -24,7 +23,7 @@ function config($stateProvider, $urlRouterProvider, $locationProvider) {
             title: 'Registration'
         })
         .state('forgotPassword', {
-            url: '/forgotpassword',
+            url: '/forgot-password',
             template: require('./auth/forgot-password.html'),
             controller: AuthController,
             controllerAs: 'auth',
@@ -43,6 +42,10 @@ function config($stateProvider, $urlRouterProvider, $locationProvider) {
         .state('stores', {
             url: '/stores',
             template: require('./components/stores/store-page.html')
+        }).state('reset', {
+            url: '/reset-password',
+            template: require('./auth/reset-password.html'),
+            controller: AuthController
         });
 }
 

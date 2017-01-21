@@ -1,8 +1,10 @@
 'use strict';
-function AuthController($scope, $auth, $rootScope, localCache, billingService, $http) {
+function AuthController($scope, $auth, localCache, billingService) {
     $scope.data = {};
     $scope.data.rolesOptions = [{id: 1, name: "USER"}, {id: 2, name: 'ADMIN'}];
     let savedStores = billingService.getStores();
+    $scope.passwordExpired = false;
+    $scope.errorMessage = "";
     savedStores.then((res) => {
         $scope.data.stores = res.data;
     });
@@ -12,10 +14,8 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService, $
             if ($scope.store !== undefined) {
                 user.stores = [];
                 user.stores.push($scope.store);
-                console.log($scope.store, " :: Getting Store");
             }
-            console.log(user);
-            $http.post('/auth/singup', user).then(function (res) {
+            $auth.post('/auth/singup', user).then(function (res) {
                 if (res.status === 200) {
                     window.location.href = '/';
                 }
@@ -40,14 +40,30 @@ function AuthController($scope, $auth, $rootScope, localCache, billingService, $
     $scope.reset = function (form) {
         $scope.submitted = true;
         if (form.$valid) {
-            let passReset = billingService.passwordReset($scope.user.email);
+            let passReset = billingService.forgotPassword($scope.user);
             passReset.then((res) => {
-                console.log(res);
+                if (res.status === 200)
+                    window.location.href = '/login';
             }).catch((err) => {
                 console.log(err);
             });
         }
     };
+
+    $scope.resetPassword = function (form) {
+        $scope.submitted = true;
+        if (form.$valid) {
+            let reset = billingService.resetPassword($scope.user);
+            reset.then((res) => {
+                if (res.status === 200){
+                    window.location.href = '/login';
+                }
+            }).catch((err) => {
+                $scope.passwordExpired = true;
+                $scope.errorMessage = err.data;
+            });
+        }
+    };
 }
-AuthController.$inject = ['$scope', '$auth', '$rootScope', 'localCache', 'billingService', '$http'];
+AuthController.$inject = ['$scope', '$auth', 'localCache', 'billingService'];
 export default AuthController;

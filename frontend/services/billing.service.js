@@ -26,15 +26,28 @@ export class BillingService {
         return storedStored;
     }
 
-    passwordReset(email) {
+    forgotPassword(email) {
         console.log(email);
-        let password = this.$http.post('/forgot-password', email);
-        password.then((res) => {
+        let reset = this.$http.post('/api/forgot-password', email);
+        reset.then((res) => {
             return res.data;
         }).catch((err) => {
             this.$log.error("something went wrong  ", err);
+            return err.message;
         });
-        return password;
+        return reset;
+    }
+
+    resetPassword(user){
+        console.log(user);
+        let passwordStatus = this.$http.post('/api/reset-password', user);
+        passwordStatus.then((res) => {
+            return res.data;
+        }).catch((err) =>{
+            this.$log.error("something went wrong  ", err);
+            return err.message;
+        });
+        return passwordStatus;
     }
 
     addItem(item) {

@@ -6,6 +6,7 @@ let console = require('console');
 let logger = require('morgan');
 let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
+let methodOverride = require('method-override');
 let expressValidator = require('express-validator');
 let httpProxy = require('http-proxy');
 let proxy = httpProxy.createProxyServer();
@@ -13,7 +14,7 @@ let app = express();
 let auth = require('./controllers/auth');
 let storeController = require('./controllers/store');
 let checkAuthenticated = require('./services/checkAuthenticated');
-let passwordAPI = require('./controllers/forgotPassword');
+let passwordAPI = require('./controllers/forgot-password');
 let itemController = require('./controllers/item');
 let cors = require('./services/cors');
 
@@ -22,7 +23,9 @@ let cors = require('./services/cors');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cors);
+app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
 app.use(cookieParser());
 
 let publicPath = path.resolve(__dirname, '..', 'public');
@@ -66,7 +69,9 @@ app.post('/api/add-item', itemController.addItem);
 app.get('/api/items', itemController.getItems);
 
 // password reset
-app.post('/forgot-password', passwordAPI.changePassword);
+app.post('/api/forgot-password', passwordAPI.changePassword);
+app.post('/api/reset-password', passwordAPI.resetPassword);
+
 
 let expressJwt = require('express-jwt');
 app.use('/private/*', expressJwt({secret: 'superSecret'}));
@@ -126,6 +131,7 @@ app.use(function (req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function (err, req, res, next) {
+        console.log(" In development Mode");
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -136,7 +142,7 @@ if (app.get('env') === 'development') {
 }
 
 // production error handler
-// no stacktraces leaked to user
+// no stack traces leaked to user
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
