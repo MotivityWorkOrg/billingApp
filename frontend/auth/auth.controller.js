@@ -15,7 +15,7 @@ function AuthController($scope, $auth, localCache, billingService) {
                 user.stores = [];
                 user.stores.push($scope.store);
             }
-            $auth.post('/auth/singup', user).then(function (res) {
+            $auth.signup(user).then(function (res) {
                 if (res.status === 200) {
                     window.location.href = '/';
                 }
