@@ -1,11 +1,11 @@
 export class ItemController {
-    constructor(billingService, $log) {
+    constructor(billingService, localCache, $log) {
         'ngInject';
         this.billingService = billingService;
         this.$log = $log;
         this.categoryArray = [{id: 1, name: 'JumboKing'}, {id: 2, name: 'Sandwich'}, {id: 3, name: 'Sides'},
             {id: 4, name: 'Beverages'}];
-        //this.subCategoryArray = [];
+        this.stores = JSON.parse(localCache.getStores());
     }
 
     createItem(form) {
@@ -15,9 +15,9 @@ export class ItemController {
         if (form.$valid) {
             let storeItem = this.billingService.addItem(item);
             storeItem.then((res) => {
-                this.$log.log(res);
                 self.submitted = false;
                 self.item = {};
+                window.location.href = '/home';
             }).catch((err) => {
                 this.$log.error(err);
             });

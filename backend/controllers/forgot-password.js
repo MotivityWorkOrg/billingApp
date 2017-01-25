@@ -74,16 +74,14 @@ module.exports = {
 
     resetPassword: function (req, res) {
         let email;
-        let forgotPassCreateDate;
         reset.findOne({password: req.body.oldPassword}, (err, pass) => {
             if (err) {
-                res.send(err.message);
+                res.send('Password did not matched, please enter valid password');
             }
             if (pass) {
                 email = pass.email;
-                forgotPassCreateDate = pass.create;
                 let today = new Date();
-                let diff = dateDiffInDays(today, forgotPassCreateDate);
+                let diff = dateDiffInDays(today, pass.create);
                 if (diff < 1) {
                     user.findOne({email: email}, function (err, user) {
                         user.password = req.body.password;

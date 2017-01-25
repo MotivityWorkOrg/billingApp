@@ -7,6 +7,7 @@ function AuthController($scope, $auth, localCache, billingService) {
     $scope.errorMessage = "";
     savedStores.then((res) => {
         $scope.data.stores = res.data;
+        localCache.setStores(JSON.stringify(res.data));
     });
     $scope.register = function (form, user) {
         $scope.submitted = true;

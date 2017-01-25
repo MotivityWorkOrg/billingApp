@@ -69,6 +69,18 @@
                 {{ errors.item.price}}
             </p>
         </div>
+        <div class="form-group" ng-class="{ 'has-success': form.store.$valid && itemCtrl.submitted,
+        'has-error': form.store.$invalid && itemCtrl.submitted }">
+            <label style="color: #083858;">Store</label>
+            <select class="form-control" title="store-selection" name="store" id="storeSelect"
+                    ng-model="itemCtrl.item.store">
+                <option disabled value="">Store</option>
+                <option ng-repeat="store in itemCtrl.stores" value="{{store._id}}">{{store.name}}</option>
+            </select>
+            <p class="help-block" ng-show="form.store.$error.required && itemCtrl.submitted">
+                A store selection is required
+            </p>
+        </div>
         <div class="form-group">
             <label style="color: #083858;">Item Code</label>
             <input type="text" name="code" placeholder="Enter item code" class="form-control"
@@ -78,7 +90,7 @@
                                           'has-error': form.fileInput.$invalid && itemCtrl.submitted }">
             <input type="file" name="fileInput" multiple="multiple" accept="image/*"
                    ng-model="itemCtrl.item.imageStream" class="form-control" file-upload/>
-            <img ng-repeat="image in itemCtrl.item.imageStream" ng-src="{{image}}" width="100" />
+            <img ng-repeat="image in itemCtrl.item.imageStream" ng-src="{{image}}" width="100"/>
             <p class="help-block" ng-show="form.fileInput.$error.required && itemCtrl.submitted">
                 A item image is required
             </p>

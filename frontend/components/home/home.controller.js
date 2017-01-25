@@ -7,7 +7,6 @@ export class HomeController {
         this.$log = $log;
         this.orderPrice = 0.0;
         this.itemInCart = false;
-        this.errorMessage = "";
     }
 
     getData() {
@@ -15,6 +14,8 @@ export class HomeController {
         let itemService = this.mainService.getItems();
         itemService.then((res) => {
             self.items = res.data;
+        }).catch((err) =>{
+            this.$log.log(err.data);
         });
     }
 
@@ -58,6 +59,8 @@ export class HomeController {
         let self = this;
         console.log(self, " ::: ", ' ::: ', divName);
         let printContents = document.getElementById(divName).innerHTML;
+        window.print();
+        //delete imageElement;
         console.log(self, " ::: ", printContents, ' ::: ', divName);
     }
 }

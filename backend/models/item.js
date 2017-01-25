@@ -33,6 +33,11 @@ let itemSchema = new Schema({
         default: null
 
     },
+    stores:[{
+        type: mongoose.Schema.ObjectId,
+        ref: "Store",
+        default: null
+    }],
     imageStream: {
         type: String,
         required: true,

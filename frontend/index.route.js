@@ -42,10 +42,15 @@ function config($stateProvider, $urlRouterProvider, $locationProvider) {
         .state('stores', {
             url: '/stores',
             template: require('./components/stores/store-page.html')
-        }).state('reset', {
+        })
+        .state('reset', {
             url: '/reset-password',
             template: require('./auth/reset-password.html'),
             controller: AuthController
+        })
+        .state('order', {
+            url: 'order',
+            template: require('./components/order/order-page.html')
         });
 }
 

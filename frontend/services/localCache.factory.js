@@ -7,6 +7,13 @@ function LocalCache($window) {
         },
         getUser: function () {
             return $window.localStorage && $window.localStorage.getItem('loggedUser');
+        },
+        setStores: function (val) {
+            $window.localStorage && $window.localStorage.setItem('stores', val);
+            return this;
+        },
+        getStores:function () {
+            return $window.localStorage && $window.localStorage.getItem('stores');
         }
     };
 }

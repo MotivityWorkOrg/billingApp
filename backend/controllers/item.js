@@ -55,8 +55,12 @@ function getCategorized(items) {
 
 module.exports = {
     addItem: function (req, res) {
-        let item = new Item(req.body);
-        item.save(req.body, (err, data) => {
+        let addItem = req.body;
+        addItem.stores = [];
+        addItem.stores.push(addItem.store);
+        delete addItem.store;
+        let item = new Item(addItem);
+        item.save(addItem, (err, data) => {
             if (err) {
                 console.log(err);
                 res.send(err.message);
