@@ -1,7 +1,7 @@
 <nav-bar></nav-bar>
 <div class="container" ng-controller="HomeController as home">
     <div class="alert alert-danger" ng-show="home.itemInCart" role="alert">
-        <strong>Item already exist!</strong> {{home.errorMessage}}
+        <strong>{{home.error}}!</strong> {{home.errorMessage}}
     </div>
     <div id="products" class="row list-group">
         <div class="pull-left-div item col-sm-6" ng-repeat="item in home.items track by (item._id + $index)">
@@ -50,9 +50,23 @@
                 </div>
             </div>
         </div>
-        <div class="input-group-addon">
-            <label><strong>{{home.orderPrice}}</strong></label>
-            <button type="submit" class="btn-default" ng-click="home.printOrder('orderProducts')">Print</button>
+        <div class="input-group-addon" style="display: inline-table">
+            <select class="form-control" style="width: 150px;" title="store-selection" name="store" id="storeSelect"
+                    ng-model="home.paymentMethod">
+                <option disabled value="">Payment Method</option>
+                <option ng-repeat="method in home.paymentMethods" value="{{method.name}}">{{method.name}}</option>
+            </select>
+
+            <input type="number" class="form-control" ng-model="home.discount"
+                   ng-disabled="home.selectedItems.length === 0"
+                   style="width: 100px" placeholder="Enter discount" discount/>
+            <div class="form-inline">
+                <label>Total Amout:</label>
+                <label><strong>{{home.orderPrice}}</strong></label>
+            </div>
+            <button type="submit" class="btn btn-default" ng-disabled="home.selectedItems.length === 0"
+                    ng-click="home.placeOrder()">Order
+            </button>
         </div>
     </div>
 </div>

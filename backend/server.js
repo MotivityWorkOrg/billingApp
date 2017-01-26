@@ -15,6 +15,7 @@ let auth = require('./controllers/auth');
 let storeController = require('./controllers/store');
 let checkAuthenticated = require('./services/checkAuthenticated');
 let passwordAPI = require('./controllers/forgot-password');
+let orderController = require('./controllers/order');
 let itemController = require('./controllers/item');
 let cors = require('./services/cors');
 
@@ -23,9 +24,11 @@ let cors = require('./services/cors');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cors);
-app.use(bodyParser.json({type: 'application/vnd.api+json'})); // parse application/vnd.api+json as json
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request
+// override with the X-HTTP-Method-Override header in the request
+app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(cookieParser());
 
 let publicPath = path.resolve(__dirname, '..', 'public');
@@ -72,6 +75,9 @@ app.get('/api/items', itemController.getItems);
 app.post('/api/forgot-password', passwordAPI.changePassword);
 app.post('/api/reset-password', passwordAPI.resetPassword);
 
+// handle order
+app.post('/api/order', orderController.createOrder);
+app.get('/api/orders', orderController.getOrders);
 
 let expressJwt = require('express-jwt');
 app.use('/private/*', expressJwt({secret: 'superSecret'}));

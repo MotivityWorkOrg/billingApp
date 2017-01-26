@@ -11,13 +11,13 @@ import satellizer from './lib/satellizer/dist/satellizer.min';
 import {NavBarController} from './components/navbar/navbar.controller';
 import navBar from './components/navbar/navbar.html';
 import RestrictedDirective from './directives/restricted.directive';
+import DiscountDirective from './directives/discount.directive';
 import LocalCache from './services/localCache.factory';
 import {StoreController} from './components/stores/store.controller';
 import {BillingService} from './services/billing.service';
 import MongooseErrorDirective from './directives/mongoose-error.directive';
 import {ItemController} from './components/items/item.controller';
 import FileUploadDirective from './directives/fileUpload.directive';
-import MainFactory from './services/mainb.factory';
 import {HomeController} from './components/home/home.controller';
 import NumberOnlyDirective from './directives/numberOnly.directive';
 import OrderCountDirective from './directives/oderCount.directive';
@@ -29,7 +29,6 @@ angular.module('billing-app', [uibs, uiRouter, satellizer])
     .config(config)
     .service('billingService', BillingService)
     .factory('localCache', LocalCache)
-    .factory('mainService', MainFactory)
     .controller('NavBarController', NavBarController)
     .controller('StoreController', StoreController)
     .controller('ItemController', ItemController)
@@ -38,6 +37,7 @@ angular.module('billing-app', [uibs, uiRouter, satellizer])
     .component('navBar', {template: navBar})
     .directive('compareTo', CompareToDirective)
     .directive('restricted', RestrictedDirective)
+    .directive('discount', DiscountDirective)
     .directive('mongooseError', MongooseErrorDirective)
     .directive('fileUpload', FileUploadDirective)
     .directive('numberOnly', NumberOnlyDirective)
