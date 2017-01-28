@@ -1,4 +1,5 @@
 'use strict';
+import {PrintModalController} from '../print-modal/printModal.controller';
 export class HomeController {
     constructor(billingService, $log, localCache, $uibModal) {
         this.mainService = billingService;
@@ -11,8 +12,23 @@ export class HomeController {
         this.itemInCart = false;
         this.paymentMethods = [{id: 1, name: 'Cash'}, {id: 2, name: 'Credit / Debit Card'},
             {id: 3, name: 'Sudexo'}, {id: 4, name: 'Pay TM'}];
-
-        this.prinModelInstance = {};
+        this.printableData = {
+            _id: "VS20170128090351",
+            discount: 0,
+            discountTotal: 0,
+            items: [{
+                Object_id: "588c111f55ded704f416a94e",
+                name: "cheese crispy veg",
+                quantity: "1",
+                total: 50
+            }],
+            paymentMethod: "Credit / Debit Card",
+            store: "587f9e4e684d631b28c7c82d",
+            subTotal: 50,
+            total: 50,
+            username: "damarlaravi",
+            create: new Date()
+        };
     }
 
     getData() {
@@ -67,7 +83,15 @@ export class HomeController {
         if (self.paymentMethod !== undefined && self.paymentMethod) {
             self.itemInCart = false;
             let order = {};
-            order.items = self.selectedItems;
+            let orderItems = [];
+            self.selectedItems.forEach((data) => {
+                let item = {};
+                item.itemName = data.itemName;
+                item.numberOfOrders = data.numberOfOrders;
+                item.price = data.price;
+                orderItems.push(item);
+            });
+            order.items = orderItems;
             let loggedUser = JSON.parse(this.localCache.getUser());
             order.username = loggedUser.username;
             order.paymentMethod = self.paymentMethod;
@@ -80,7 +104,8 @@ export class HomeController {
                 self.paymentMethod = null;
                 self.orderPrice = 0.0;
                 self.discount = null;
-                this.preparePrint(res.data);
+                self.printableData = res.data;
+                self.preparePrint();
             }).catch((err) => {
                 this.$log.log("ERROR is :: ", err.message);
             });
@@ -92,9 +117,25 @@ export class HomeController {
         }
     }
 
-    preparePrint(data) {
-        let prinModelInstance = this.$uibModal.open({
-            templateUrl: '../print-modal/print-page.html'
+    preparePrint() {
+        let self = this;
+        this.$log.log(self.printableData, '   ::: In Print ');
+        let printModelInstance = this.$uibModal.open({
+            animation: true,
+            template: require('../print-modal/print-page.html'),
+            //windowTemplateUrl: '../print-modal/print-page.html',
+            controller: PrintModalController,
+            controllerAs: 'printCtrl',
+            resolve: {
+                orderData: function () {
+                    return self.printableData;
+                }
+            }
+        });
+
+        printModelInstance.result.then(function () {
+            printModelInstance.close();
+            console.log('Coming in Modal Instance');
         });
     }
 }

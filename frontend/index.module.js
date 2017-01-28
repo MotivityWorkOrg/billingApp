@@ -1,5 +1,6 @@
 require('./reset.less');
 //require('./lib/jquery');
+import './lib/angular-bootstrap/ui-bootstrap-csp.css';
 import './lib/bootstrap/dist/css/bootstrap.css';
 import angular from './lib/angular';
 import uibs from './lib/angular-bootstrap';
@@ -22,6 +23,8 @@ import {HomeController} from './components/home/home.controller';
 import NumberOnlyDirective from './directives/numberOnly.directive';
 import OrderCountDirective from './directives/oderCount.directive';
 import {OrderController} from './components/order/order.controller';
+import {PrintModalController} from './components/print-modal/printModal.controller';
+
 
 angular.module('billing-app', [uibs, uiRouter, satellizer])
     .constant('API_URL', 'http://localhost:3000/')
@@ -34,6 +37,7 @@ angular.module('billing-app', [uibs, uiRouter, satellizer])
     .controller('ItemController', ItemController)
     .controller('HomeController', HomeController)
     .controller('OrderController', OrderController)
+    .controller('PrintModalController', PrintModalController)
     .component('navBar', {template: navBar})
     .directive('compareTo', CompareToDirective)
     .directive('restricted', RestrictedDirective)

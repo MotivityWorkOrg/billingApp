@@ -30,10 +30,11 @@ function getDateTime() {
 
 module.exports = {
     createOrder: function (req, res) {
+        console.log(req.body, ' << ::: >> ');
         let items = [];
-        let discount = req.body.discount !== undefined ? Number(req.body.discount) : 1.0;
+        let discount = req.body.discount;
+        console.log(req.body.items, ' << :: items :: >> ');
         let checkedItems = req.body.items;
-
         checkedItems.forEach((data) => {
             let item = {};
             item.name = data.itemName;
@@ -42,22 +43,22 @@ module.exports = {
             items.push(item);
             console.log(' Inside Callback Function ', item);
         });
-        //console.log(items, ' ::: :::');
+        console.log(items, ' ::: :::');
 
         let orderTotal = items.reduce(function (pre, item) {
             return pre + item.total;
         }, 0);
         let discountTotal = 0.0;
         let afterDiscTotal = 0.0;
-        if(discount != 1){
+        if (discount !== undefined) {
             discountTotal = (discount * orderTotal) / 100;
-            afterDiscTotal = orderTotal - discountTotal;
+            afterDiscTotal = Math.round(orderTotal - discountTotal);
         }
-        else{
+        else {
             afterDiscTotal = orderTotal;
         }
 
-        //console.log(discount, '  ', orderTotal, '  ### ', discountTotal, " Total Order Price :::: ", orderTotal);
+        console.log(discount, '  ', orderTotal, '  ### ', discountTotal, " Total Order Price :::: ", orderTotal);
         let savedOrderItems = [];
         itemController.saveItems(items, function (savedItem) {
             savedOrderItems.push(savedItem);
@@ -68,6 +69,7 @@ module.exports = {
                 order.items = savedOrderItems;
                 order.discount = discount;
                 order.discountTotal = discountTotal;
+                order.total = orderTotal;
                 order.subTotal = afterDiscTotal;
                 order.username = req.body.username;
                 order.store = req.body.store;

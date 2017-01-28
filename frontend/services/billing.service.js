@@ -73,7 +73,7 @@ export class BillingService {
 
     createOrder(order) {
         this.$log.log(order, ' ::: :::');
-        let orders = this.$http.post('./api/order', order);
+        let orders = this.$http.post('/api/order', order);
         orders.then((res) => {
             return res;
         }).catch((err) => {

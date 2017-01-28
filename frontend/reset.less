@@ -30,26 +30,43 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.order-text{
+.order-text {
   padding-left: 2px !important;
   padding-right: 2px !important;
   margin-left: 1px !important;
   height: 80%;
 }
 
-.order-del{
-  padding : 0 2px 0 2px !important;
+.order-del {
+  padding: 0 2px 0 2px !important;
 }
 
-.pull-left-div{
+.pull-left-div {
   padding-left: 0 !important;
 }
 
-.show-pointer{
+.show-pointer {
   cursor: pointer;
 }
 
-.order-price-text{
+*[role="form"] {
+  max-width: 530px;
+  padding: 15px;
+
+  background-color: #fff;
+  border-radius: 0.3em;
+}
+
+*[role="form"] h2 {
+
+  margin: 0 auto 1em;
+}
+
+.form-control-left {
+  text-align: right;
+}
+
+.order-price-text {
   width: 53% !important;
   padding-left: 2px !important;
   padding-right: 0 !important;
@@ -60,20 +77,25 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol, ul {
   list-style: none;
 }
+
 blockquote, q {
   quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
