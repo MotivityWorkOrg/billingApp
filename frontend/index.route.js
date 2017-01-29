@@ -49,7 +49,7 @@ function config($stateProvider, $urlRouterProvider, $locationProvider) {
             controller: AuthController
         })
         .state('order', {
-            url: 'order',
+            url: '/order',
             template: require('./components/order/order-page.html')
         });
 }

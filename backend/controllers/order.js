@@ -51,7 +51,7 @@ module.exports = {
         let discountTotal = 0.0;
         let afterDiscTotal = 0.0;
         if (discount !== undefined) {
-            discountTotal = (discount * orderTotal) / 100;
+            discountTotal = Math.round((Number(discount) * orderTotal) / 100);
             afterDiscTotal = Math.round(orderTotal - discountTotal);
         }
         else {

@@ -1,9 +1,9 @@
 'use strict';
-function OrderCountDirective($log) {
+function OrderCountDirective() {
     return {
         restrict: 'A',
         link: function (scope, ele) {
-            $log.log('Coming in Order count directive');
+            //$log.log('Coming in Order count directive');
             let homeController = scope.$parent.home;
             let selectedOrder = scope.orderItem;
             ele.bind("keyup", (event) => {

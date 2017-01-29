@@ -1,21 +1,24 @@
 export class PrintModalController {
-    constructor($log, $window, $uibModalInstance) {
-        this.printableData = {};
+    constructor($scope, $log, $window, $uibModalInstance, orderData) {
         this.$log = $log;
         this.$window = $window;
         this.$uibModalInstance = $uibModalInstance;
-        //$log.log(':::   ', this.orderData);
+        this.$scope = $scope;
+        orderData.create = new Date();
+        this.$scope.orderData = orderData;
+        $log.log(':::   ', this.orderData);
     }
 
     //this.$window.close();
 
 
     printOrder(divName) {
-        let printContents = document.getElementById(divName).innerHTML;
-        let originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
+        //let originalContents = document.body.innerHTML;
+        this.$uibModalInstance.close();
+        document.body.innerHTML = document.getElementById(divName).innerHTML;
         this.$window.print();
-        document.body.innerHTML = originalContents;
+        this.$window.location = '/home';
+        //document.body.innerHTML = originalContents;
         this.$log.log(' :::: ', this.$uibModalInstance.close());
     }
 }

@@ -21,7 +21,7 @@ function DiscountDirective($log) {
                     let revisedTotalPrice = 0.0;
                     if(discount > 0){
                         discountTotal = (discount * totalOrderPrice) / 100;
-                        let afterDiscTotal = (totalOrderPrice - discountTotal);
+                        let afterDiscTotal = (totalOrderPrice - Math.round(discountTotal));
                         revisedTotalPrice = Math.round(afterDiscTotal);
                     }
                     else {

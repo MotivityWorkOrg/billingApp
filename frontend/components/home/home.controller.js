@@ -12,23 +12,6 @@ export class HomeController {
         this.itemInCart = false;
         this.paymentMethods = [{id: 1, name: 'Cash'}, {id: 2, name: 'Credit / Debit Card'},
             {id: 3, name: 'Sudexo'}, {id: 4, name: 'Pay TM'}];
-        this.printableData = {
-            _id: "VS20170128090351",
-            discount: 0,
-            discountTotal: 0,
-            items: [{
-                Object_id: "588c111f55ded704f416a94e",
-                name: "cheese crispy veg",
-                quantity: "1",
-                total: 50
-            }],
-            paymentMethod: "Credit / Debit Card",
-            store: "587f9e4e684d631b28c7c82d",
-            subTotal: 50,
-            total: 50,
-            username: "damarlaravi",
-            create: new Date()
-        };
     }
 
     getData() {
@@ -99,13 +82,11 @@ export class HomeController {
             order.store = loggedUser.stores[0];
             let orderService = this.mainService.createOrder(order);
             orderService.then((res) => {
-                console.log(res.data);
                 self.selectedItems = [];
                 self.paymentMethod = null;
                 self.orderPrice = 0.0;
                 self.discount = null;
-                self.printableData = res.data;
-                self.preparePrint();
+                self.preparePrint(res.data);
             }).catch((err) => {
                 this.$log.log("ERROR is :: ", err.message);
             });
@@ -117,8 +98,9 @@ export class HomeController {
         }
     }
 
-    preparePrint() {
+    preparePrint(data) {
         let self = this;
+        self.printableData = data;
         this.$log.log(self.printableData, '   ::: In Print ');
         let printModelInstance = this.$uibModal.open({
             animation: true,
@@ -128,7 +110,7 @@ export class HomeController {
             controllerAs: 'printCtrl',
             resolve: {
                 orderData: function () {
-                    return self.printableData;
+                    return data;
                 }
             }
         });

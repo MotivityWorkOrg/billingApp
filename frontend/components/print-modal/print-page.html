@@ -1,5 +1,5 @@
-<div id="modalDemo" class="modal-demo" ng-controller="HomeController as print">
-    <form class="form-horizontal" role="form">
+<div class="modal-demo">
+    <form id="modalDemo" class="form-horizontal" role="form">
         <h2>VS Foods</h2>
         <div class="form-group">
             <label class="col-sm-3 form-control-left">Address: </label>
@@ -14,15 +14,15 @@
         <div class="form-group">
             <label class="col-sm-3 form-control-left">Cash Memo: </label>
             <div class="col-sm-9">
-                <label>{{print.printableData._id}}</label>
-                <label style="padding-left: 40%;">{{print.printableData.create.toISOString().substring(0, 10)}}</label>
+                <label>{{orderData._id}}</label>
+                <label style="padding-left: 40%;">{{orderData.create.toISOString().substring(0, 10)}}</label>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 form-control-left">Cashier: </label>
             <div class="col-sm-9">
                 <label>VSFoods</label>
-                <label style="padding-left: 46%;">Time:{{print.printableData.create.toLocaleTimeString()}}</label>
+                <label style="padding-left: 46%;">Time:{{orderData.create.toLocaleTimeString()}}</label>
             </div>
         </div>
         <hr class="pull-left-div"/>
@@ -36,7 +36,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="item in print.printableData.items">
+                <tr ng-repeat="item in orderData.items">
                     <td>{{item.name}}</td>
                     <td>{{item.quantity}}</td>
                     <td>{{item.total}}</td>
@@ -48,31 +48,30 @@
         <div class="form-group">
             <label class="col-sm-3 form-control-left">Total Amount: </label>
             <div class="col-sm-9">
-                <label style="padding-left: 46%;">{{print.printableData.total}} INR</label>
+                <label style="padding-left: 46%;">{{orderData.total}} INR</label>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 form-control-left">Less: {{print.printableData.discount}}% Dis </label>
+            <label class="col-sm-3 form-control-left">Less: {{orderData.discount}}% Dis </label>
             <div class="col-sm-9">
-                <label style="padding-left: 46%;">{{print.printableData.discountTotal}} INR</label>
+                <label style="padding-left: 46%;">{{orderData.discountTotal}} INR</label>
             </div>
         </div>
         <hr class="pull-left-div"/>
         <div class="form-group">
             <label class="col-sm-3 form-control-left">Sub Total:</label>
             <div class="col-sm-9">
-                <label style="padding-left: 46%;">{{print.printableData.subTotal}} INR</label>
+                <label style="padding-left: 46%;">{{orderData.subTotal}} INR</label>
             </div>
         </div>
         <hr class="pull-left-div"/>
     </form>
-</div>
-
-<div class="form-group pull-right">
-    <div class="col-sm-9">
-        <button class="btn btn-success"
-                ng-click="printCtrl.$uibModalInstance.close(); printCtrl.printOrder('modalDemo')">
-            <i class="fa fa-print"></i>Print
-        </button>
+    <div class="form-group pull-right">
+        <div class="col-sm-9">
+            <button class="btn btn-success"
+                    ng-click="printCtrl.printOrder('modalDemo')">
+                <i class="fa fa-print"></i>Print
+            </button>
+        </div>
     </div>
 </div>
