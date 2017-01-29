@@ -1,6 +1,7 @@
 'use strict';
 let Order = require('../models/order');
 let itemController = require('./order-item');
+let moment = require('moment');
 let console = require('console');
 function getDateTime() {
     let now = new Date();
@@ -27,13 +28,20 @@ function getDateTime() {
     }
     return 'VS' + year + month + day + hour + minute + second;
 }
+function orderCreate() {
+    let date = new Date();
+    return moment(date).format("YYYY/MM/DD");
+}
 
+function findSelectedOrder(selectedDate) {
+    return moment(selectedDate).format("YYYY/MM/DD");
+}
 module.exports = {
     createOrder: function (req, res) {
-        console.log(req.body, ' << ::: >> ');
+        //console.log(req.body, ' << ::: >> ');
         let items = [];
         let discount = req.body.discount;
-        console.log(req.body.items, ' << :: items :: >> ');
+        //console.log(req.body.items, ' << :: items :: >> ');
         let checkedItems = req.body.items;
         checkedItems.forEach((data) => {
             let item = {};
@@ -41,7 +49,7 @@ module.exports = {
             item.quantity = data.numberOfOrders;
             item.total = Number(data.price) * Number(data.numberOfOrders);
             items.push(item);
-            console.log(' Inside Callback Function ', item);
+            //console.log(' Inside Callback Function ', item);
         });
         console.log(items, ' ::: :::');
 
@@ -58,7 +66,7 @@ module.exports = {
             afterDiscTotal = orderTotal;
         }
 
-        console.log(discount, '  ', orderTotal, '  ### ', discountTotal, " Total Order Price :::: ", orderTotal);
+        //console.log(discount, '  ', orderTotal, '  ### ', discountTotal, " Total Order Price :::: ", orderTotal);
         let savedOrderItems = [];
         itemController.saveItems(items, function (savedItem) {
             savedOrderItems.push(savedItem);
@@ -74,6 +82,8 @@ module.exports = {
                 order.username = req.body.username;
                 order.store = req.body.store;
                 order.paymentMethod = req.body.paymentMethod;
+                order.create = orderCreate();
+                //console.log(' Order Create Date is ::: ', order.create);
                 let saveOrder = new Order(order);
                 //console.log(order, ' ::::: <<<< >>>> ::::', savedOrderItems);
                 saveOrder.save(order, (err, order) => {
@@ -87,6 +97,13 @@ module.exports = {
         //console.log(savedOrderItems.length, '  ===  ', checkedItems.length);
     },
     getOrders: function (req, res) {
-        console.log(req, res);
+        //let date = findSelectedOrder(req.query.period);
+        let query = Order.find({create: req.query.period});
+        query.exec(function (err, orders) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(orders);
+        });
     }
 };

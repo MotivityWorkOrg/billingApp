@@ -4,7 +4,7 @@ let console = require('console');
 
 module.exports = {
     saveItems: function (items, callback) {
-        console.log(" Hi this is Order Item");
+        //console.log(" Hi this is Order Item");
         items.forEach((data) => {
             //console.log(data, ' :: In For Each Loop');
             let orderItem = new OrderItems(data);

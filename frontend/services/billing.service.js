@@ -72,7 +72,7 @@ export class BillingService {
     }
 
     createOrder(order) {
-        this.$log.log(order, ' ::: :::');
+        //this.$log.log(order, ' ::: :::');
         let orders = this.$http.post('/api/order', order);
         orders.then((res) => {
             return res;
@@ -81,5 +81,16 @@ export class BillingService {
             return err;
         });
         return orders;
+    }
+
+    getSelectedOrders(date){
+        let selectedOrders = this.$http.get('/api/orders', {params: {period: date}});
+        selectedOrders.then((res) => {
+            return res;
+        }).catch((err) => {
+            this.$log.log("Something went wrong in order save", err);
+            return err;
+        });
+        return selectedOrders;
     }
 }

@@ -1,21 +1,48 @@
 <nav-bar></nav-bar>
-<div class="form-group" ng-controller="OrderController as order">
-    <form class="form-horizontal" role="form" autocomplete="off">
+<div class="container" ng-controller="OrderController as order">
+    <form class="form" role="form" autocomplete="off">
         <h3>Orders</h3>
         <!-- <h4 class="error-message" ng-model="errorMessage" ng-show="errorMessage.length"> {{errorMessage}} </h4>-->
         <div class="form-group">
-            <label class="control-label col-sm-2">Period</label>
-            <div class="col-md-6">
-                <p class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
-                           is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
-                           close-text="Close" alt-input-formats="altInputFormats"/>
-                    <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i
-                    class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-                </p>
+            <div class="form-inline">
+                <label class="control-label col-sm-2">Period</label>
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{periodFormat}}"
+                               ng-model="order.selectionDate" is-open="order.orderPicker.opened"
+                               datepicker-options="order.dateOptions" ng-required="true"
+                               show-button-bar="false"
+                               close-text="Close" alt-input-formats="altInputFormats"
+                               max-date="maxDt" datepicker-mode="'month'"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="order.periodOpen()">
+                            <i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
             </div>
+            <button class="btn btn-primary" ng-click="order.getOrders()">Get</button>
+        </div>
+        <div class="form-group" style="padding-left: 5%" ng-show="order.periodOrders.length > 0">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <th>Payment Method</th>
+                    <th>Discount Total</th>
+                    <th>total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in order.periodOrders">
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.paymentMethod}}</td>
+                    <td>{{item.discountTotal}}</td>
+                    <td>{{item.total}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <label class="pull-right" ng-show="order.periodOrders.length > 0">{{order.periodTotal}}</label>
         </div>
     </form>
 </div>
