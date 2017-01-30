@@ -33,9 +33,6 @@ function orderCreate() {
     return moment(date).format("YYYY/MM/DD");
 }
 
-function findSelectedOrder(selectedDate) {
-    return moment(selectedDate).format("YYYY/MM/DD");
-}
 module.exports = {
     createOrder: function (req, res) {
         //console.log(req.body, ' << ::: >> ');
