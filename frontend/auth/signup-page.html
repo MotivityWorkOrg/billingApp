@@ -1,11 +1,11 @@
-<div class="center-block"
-     style="border: 2px solid #083858; border-radius: 8px; width: 450px; padding: 0 10px 20px 20px;">
-    <h1 class="text-center" style="color: #083858;">Sign Up</h1>
+<div class="signup-pg">
+<div class="center-block">
+    <h1 class="usr-title">Sign Up</h1>
 
     <form class="form" name="form" ng-submit="register(form, user)" novalidate autocomplete="off">
         <div class="form-group" ng-class="{ 'has-success': form.firstName.$valid && submitted,
                                           'has-error': form.firstName.$invalid && submitted }">
-            <label style="color: #083858;">First Name</label>
+            <label>First Name</label>
 
             <input type="text" name="firstName" placeholder="Enter first name" class="form-control"
                    ng-model="user.firstName"
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group" ng-class="{ 'has-success': form.lastName.$valid && submitted,
                                           'has-error': form.lastName.$invalid && submitted }">
-            <label style="color: #083858;">Last Name</label>
+            <label>Last Name</label>
 
             <input type="text" name="lastName" placeholder="Enter last name" class="form-control"
                    ng-model="user.lastName"
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
                                           'has-error': form.email.$invalid && submitted }">
-            <label style="color: #083858;">Email</label>
+            <label>Email</label>
             <input type="email" name="email" placeholder="Enter email" class="form-control" ng-model="user.email"
                    required
                    mongoose-error/>
@@ -43,7 +43,7 @@
         </div>
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                           'has-error': form.name.$invalid && submitted }">
-            <label style="color: #083858;">Username</label>
+            <label>Username</label>
 
             <input type="text" name="name" placeholder="Enter username" class="form-control" ng-model="user.username"
                    required/>
@@ -53,7 +53,7 @@
         </div>
         <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
                                           'has-error': form.password.$invalid && submitted }">
-            <label style="color: #083858;">Password</label>
+            <label>Password</label>
 
             <input type="password" name="password" placeholder="Enter password" class="form-control"
                    ng-model="user.password"
@@ -65,7 +65,7 @@
         </div>
         <div class="form-group" ng-class="{ 'has-success': form.pwdConfirm.$valid && submitted,
                                           'has-error': form.pwdConfirm.$invalid && submitted }">
-            <label style="color: #083858;">Confirm Password</label>
+            <label>Confirm Password</label>
 
             <input type="password" name="pwdConfirm" placeholder="Enter confirm password" class="form-control"
                    ng-model="user.confirm"
@@ -79,7 +79,7 @@
         </div>
         <div class="form-group" ng-class="{ 'has-success': form.phoneNumber.$valid && submitted,
                                           'has-error': form.phoneNumber.$invalid && submitted }">
-            <label style="color: #083858;">Phone Number</label>
+            <label>Phone Number</label>
 
             <input type="number" name="phoneNumber" placeholder="Enter phone number" class="form-control"
                    ng-model="user.phoneNumber"
@@ -97,7 +97,7 @@
         </div>
         <div class="form-group" ng-class="{ 'has-success': form.pwdConfirm.$valid && submitted,
                                           'has-error': form.pwdConfirm.$invalid && submitted }">
-            <label style="color: #083858;">Date of Birth</label>
+            <label>Date of Birth</label>
             <div class="form-inline">
                 <select name="day" title="day" class="form-control" ng-model="user.day">
                     <option value="" disabled>Day</option>
@@ -195,12 +195,12 @@
         <div class="form-group" data-type="selectors" id="u_0_1"
              aria-describedby="js_be">
             <div class="form-inline">
-                <label style="color: #083858;">Role</label>
+                <label>Role</label>
                 <select class="form-control" title="role-selection" name="role" id="store" ng-model="user.role">
                     <option disabled value="">Role</option>
                     <option ng-repeat="option in data.rolesOptions" value="{{option.name}}">{{option.name}}</option>
                 </select>
-                <label style="color: #083858;">Store</label>
+                <label>Store</label>
                 <select class="form-control" title="store-selection" name="store" id="storeSelect"
                         ng-model="store">
                     <option disabled value="">Store</option>
@@ -208,9 +208,9 @@
                 </select>
             </div>
         </div>
-        <div>
+        <div class="clr text-center">
             <button class="btn btn-primary btn-sm btn-login" type="submit">
-                Sign up
+                Sign Up
             </button>
             <a class="btn btn-default btn-sm btn-register" ui-sref="login">
                 Login
@@ -228,4 +228,5 @@
         </div>-->
     </form>
 
+</div>
 </div>
