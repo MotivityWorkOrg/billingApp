@@ -88,7 +88,11 @@ let config = {
         new ExtractTextPlugin(assetsPath + "/styles.css"),
         // We have to manually add the Hot Replacement plugin when running
         // from Node
-        new Webpack.HotModuleReplacementPlugin()
+        new Webpack.HotModuleReplacementPlugin(),
+        new Webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        })
     ],
     jshint: {
         // any jshint option http://www.jshint.com/docs/options/

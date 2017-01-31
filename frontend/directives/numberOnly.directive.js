@@ -1,29 +1,32 @@
 'use strict';
+import $ from '../lib/jquery/dist/jquery.min';
+window.jQuery = $;
+window.$ = $;
 
-function NumberOnlyDirective() {
+function NumberOnlyDirective($log) {
     // this directive allows only numbers with decimal point.
     // You can specify the max decimal points using data-max-decimal-points in the dom element.
     // if data-max-decimal-points is not specified, it will allow up to any decimal point.
     return {
-        restrict: "AE",
+        restrict: "A",
         link: function (scope, elem) {
-            if (elem.attr("min")) {
-                elem.attr("min", 0);
+            if (!$(elem).attr("min")) {
+                $(elem).attr("min", 0);
             }
             function toIncreaseMaxLengthBy(elem) {
                 let maxDecimalPoints = elem.data('maxDecimalPoints');
                 return (1 + maxDecimalPoints);
             }
 
-            let el = elem[0];
+            let el = $(elem)[0];
             el.initMaxLength = elem.data('maxLength');
             el.maxDecimalPoints = elem.data('maxDecimalPoints');
             let checkPositive = function (elem, ev) {
                 try {
-                    let el = (elem)[0];
+                    let el = $(elem)[0];
                     if (el.value.indexOf('.') > -1) {
                         if (ev.charCode >= 48 && ev.charCode <= 57) {
-                            if (el.value.indexOf('.') == el.value.length - toIncreaseMaxLengthBy(elem)) {
+                            if (el.value.indexOf('.') === el.value.length - toIncreaseMaxLengthBy(elem)) {
                                 if (el.selectionStart > el.value.indexOf('.')) {
                                     return false;
                                 } else {
@@ -31,13 +34,14 @@ function NumberOnlyDirective() {
                                 }
                             } else {
                                 if (el.selectionStart <= el.value.indexOf('.')) {
-                                    if (el.value.indexOf('.') == toIncreaseMaxLengthBy(elem)) {
+                                    if (el.value.indexOf('.') === toIncreaseMaxLengthBy(elem)) {
                                         return false;
                                     }
                                 }
                             }
                         }
                     } else {
+                        $log.log(elem.data('maxLength', " ::: :: "));
                         if (el.value.length === elem.data('maxLength')) {
                             if (ev.charCode === 46) {
                                 if (typeof el.maxDecimalPoints === 'undefined') {
@@ -53,11 +57,11 @@ function NumberOnlyDirective() {
                                 return false;
                             }
                         }
-                        if (ev.charCode === 46) {
+                        if (ev.charCode == 46) {
                             return el.selectionStart >= el.value.length - elem.data('maxDecimalPoints');
                         }
                     }
-                    if (ev.charCode === 46) {
+                    if (ev.charCode == 46) {
                         return el.value.indexOf('.') <= -1;
                     }
                     if ((ev.charCode < 48 || ev.charCode > 57) && ev.charCode !== 0) {
@@ -68,7 +72,7 @@ function NumberOnlyDirective() {
             };
             let change_maxLength = function (elem) {
                 try {
-                    let el = (elem)[0];
+                    let el = $(elem)[0];
                     if (el.value.indexOf('.') > -1) {
                         elem.data('maxLength', el.initMaxLength + toIncreaseMaxLengthBy(elem));
                     }
@@ -80,17 +84,16 @@ function NumberOnlyDirective() {
                         elem.data('maxLength', el.initMaxLength);
                     }
                 } catch (err) {
-                    console.log(err);
                 }
             };
-            elem.on("keypress", function (event) {
+            $(elem).on("keypress", function (event) {
                 return checkPositive(elem, event);
             });
-            elem.on("input", function (event) {
+            $(elem).on("input", function (event) {
                 return change_maxLength(elem, event);
             });
         }
     };
 }
-
+NumberOnlyDirective.$inject = ['$log'];
 export default NumberOnlyDirective;

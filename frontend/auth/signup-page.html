@@ -95,8 +95,8 @@
                 {{ errors.phoneNumber }}
             </p>
         </div>
-        <div class="form-group" ng-class="{ 'has-success': form.pwdConfirm.$valid && submitted,
-                                          'has-error': form.pwdConfirm.$invalid && submitted }">
+        <div class="form-group" ng-class="{ 'has-success': form.day.$valid && form.month.$valid && form.year.$valid && submitted,
+                                          'has-error': form.day.$invalid && form.month.$valid && form.year.$valid && submitted }" required>
             <label style="color: #083858;">Date of Birth</label>
             <div class="form-inline">
                 <select name="day" title="day" class="form-control" ng-model="user.day">
@@ -150,13 +150,6 @@
                 </select>
                 <select name="year" title="month" class="form-control" ng-model="user.year">
                     <option disabled value="">Year</option>
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
-                    <option value="2015">2015</option>
-                    <option value="2014">2014</option>
-                    <option value="2013">2013</option>
-                    <option value="2012">2012</option>
-                    <option value="2011">2011</option>
                     <option value="2010">2010</option>
                     <option value="2009">2009</option>
                     <option value="2008">2008</option>
@@ -189,12 +182,17 @@
                     <option value="1981">1981</option>
                     <option value="1980">1980</option>
                     <option value="1979">1979</option>
+                    <option value="1982">1978</option>
+                    <option value="1981">1977</option>
+                    <option value="1980">1976</option>
+                    <option value="1979">1975</option>
                 </select>
             </div>
         </div>
         <div class="form-group" data-type="selectors" id="u_0_1"
              aria-describedby="js_be">
-            <div class="form-inline">
+            <div class="form-inline" ng-class="{ 'has-success': form.store.$valid && submitted,
+                                          'has-error': form.store.$invalid && submitted }" required>
                 <label style="color: #083858;">Role</label>
                 <select class="form-control" title="role-selection" name="role" id="store" ng-model="user.role">
                     <option disabled value="">Role</option>
@@ -217,15 +215,15 @@
             </a>
         </div>
 
-       <!-- <hr>
-        <div>
-            <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-                <i class="fa fa-facebook"></i> Connect with Facebook
-            </a>
-            <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
-                <i class="fa fa-twitter"></i> Connect with Twitter
-            </a>
-        </div>-->
+        <!-- <hr>
+         <div>
+             <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+                 <i class="fa fa-facebook"></i> Connect with Facebook
+             </a>
+             <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
+                 <i class="fa fa-twitter"></i> Connect with Twitter
+             </a>
+         </div>-->
     </form>
 
 </div>

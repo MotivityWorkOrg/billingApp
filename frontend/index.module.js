@@ -1,5 +1,4 @@
 require('./reset.less');
-//require('./lib/jquery');
 import './lib/angular-bootstrap/ui-bootstrap-csp.css';
 import './lib/bootstrap/dist/css/bootstrap.css';
 import angular from './lib/angular';
