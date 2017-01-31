@@ -1,82 +1,62 @@
-// Color variables (appears count calculates by raw css)
-@color0: #083858; // Appears 4 times
-@color1: #ffffff; // Appears 4 times
-@color2: #cccccc; // Appears 3 times
+// Sign In CSS Start Here
 
-.btn-facebook {
-  background-color: #3B5998;
-  border-color: #133783;
-  color: @color1;
+.title {
+  font-size: @font-size-lg;
+  padding: 20px;
+  border-bottom: 1px solid @gray-light;
+  margin: -20px -20px 20px;
+  background: @gray-light;
+  border-radius: 8px 8px 0px 0px;
 }
-
-.btn-twitter {
-  background-color: #2daddc;
-  border-color: #0271bf;
-  color: @color1;
-}
-
-.btn-github {
-  background-color: #fafafa;
-  border-color: @color2;
-  color: @color1;
-}
-
-.col-centered {
-  float: none;
-  margin: 0 auto;
-}
-
-.signinForm {
-  border-radius: 8px 8px;
-  border: 1px solid #bdbdbd;
-  box-shadow: 0 1px 1px 0 grey;
-  margin: 0 auto;
-  width: 340px;
-}
-
-.input {
-  margin: 15px 0;
-  vertical-align: baseline;
-}
-
-.snapit-logo {
-  margin: 0 auto;
-  width: 200px;
-}
-
-.login-button {
-  background-color: @color0;
-  border-radius: 8px;
-  border: 1px solid @color2;
-  color: @color1;
-  a {
-    background-color: transparent;
-    color: inherit;
-    text-decoration: none;
+.signin-pg {
+  background: url(../images/login-bg.png) no-repeat left center;
+  background-size: 580px;
+  .center-block {
+    max-width: 95%;
+    width: 400px;
+    margin: auto;
+    margin-top: 10%;
+    border: 1px solid @gray-light;
+    padding: @pad-base * 2;
+    .border-radius (10px);
   }
-  &:hover {
-    background-color: @color2;
-    color: @color0;
+  .help-block {
+    color: @red !important;
+    font-size: @font-size-xs;
+  }
+  .usr-title {
+    .title ();
   }
 }
 
-.panel-login {
-  //border-radius: 8px;
+// Sign Up CSS Start Here
+.signup-pg {
+  .center-block {
+    max-width: 95%;
+    width: 850px;
+    margin:25px auto;
+    border: 1px solid @gray-light;
+    padding: @pad-base * 2;
+    .border-radius (10px);
+  }
+  .help-block {
+    color: @red !important;
+    font-size: @font-size-xs;
+  }
+  .usr-title {
+    .title ();
+  }
+  .form-group {
+    width: 100%;
+    max-width: 400px;
+    float: left;
+    padding-right: 20px;
+  }
 }
-
-.panelintro {
-  border-radius: 8px;
-  border: 2px solid @color0;
+.clr {
+  clear: both;
 }
-
-.panel {
-  border-bottom: 0;
-}
-
-.panel-heading {
-  border-bottom: 0;
-}
-
-.labeltext {
-  color: @color0;
+.btn {
+  padding: 7px 20px;
+  font-size: @font-size-base;
 }
