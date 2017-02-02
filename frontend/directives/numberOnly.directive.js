@@ -9,88 +9,29 @@ function NumberOnlyDirective($log) {
     // if data-max-decimal-points is not specified, it will allow up to any decimal point.
     return {
         restrict: "A",
-        link: function (scope, elem) {
-            if (!$(elem).attr("min")) {
-                $(elem).attr("min", 0);
-            }
-            function toIncreaseMaxLengthBy(elem) {
-                let maxDecimalPoints = elem.data('maxDecimalPoints');
-                return (1 + maxDecimalPoints);
+        require: 'ngModel',
+        link: function (scope, elem, attr, ngModelCtrl) {
+            function fromUser(text) {
+                if (text) {
+                    let transformedInput = text.toString().replace(/[^0-9-]/g, '');
+                    if (transformedInput !== text) {
+                        ngModelCtrl.$setViewValue(transformedInput);
+                        ngModelCtrl.$render();
+                    }
+                    return transformedInput;
+                }
+                return undefined;
             }
 
-            let el = $(elem)[0];
-            el.initMaxLength = elem.data('maxLength');
-            el.maxDecimalPoints = elem.data('maxDecimalPoints');
-            let checkPositive = function (elem, ev) {
-                try {
-                    let el = $(elem)[0];
-                    if (el.value.indexOf('.') > -1) {
-                        if (ev.charCode >= 48 && ev.charCode <= 57) {
-                            if (el.value.indexOf('.') === el.value.length - toIncreaseMaxLengthBy(elem)) {
-                                if (el.selectionStart > el.value.indexOf('.')) {
-                                    return false;
-                                } else {
-                                    return el.value.length != elem.data('maxLength');
-                                }
-                            } else {
-                                if (el.selectionStart <= el.value.indexOf('.')) {
-                                    if (el.value.indexOf('.') === toIncreaseMaxLengthBy(elem)) {
-                                        return false;
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        $log.log(elem.data('maxLength', " ::: :: "));
-                        if (el.value.length === elem.data('maxLength')) {
-                            if (ev.charCode === 46) {
-                                if (typeof el.maxDecimalPoints === 'undefined') {
-                                    return true;
-                                } else {
-                                    if (el.selectionStart < el.value.length - el.maxDecimalPoints) {
-                                        return false;
-                                    }
-                                }
-                                elem.data('maxLength', el.initMaxLength + toIncreaseMaxLengthBy(elem));
-                                return true;
-                            } else if (ev.charCode >= 48 && ev.charCode <= 57) {
-                                return false;
-                            }
-                        }
-                        if (ev.charCode == 46) {
-                            return el.selectionStart >= el.value.length - elem.data('maxDecimalPoints');
-                        }
-                    }
-                    if (ev.charCode == 46) {
-                        return el.value.indexOf('.') <= -1;
-                    }
-                    if ((ev.charCode < 48 || ev.charCode > 57) && ev.charCode !== 0) {
-                        return false;
-                    }
-                } catch (err) {
-                }
-            };
-            let change_maxLength = function (elem) {
-                try {
-                    let el = $(elem)[0];
-                    if (el.value.indexOf('.') > -1) {
-                        elem.data('maxLength', el.initMaxLength + toIncreaseMaxLengthBy(elem));
-                    }
-                    else {
-                        if (elem.data('maxLength') == el.initMaxLength + toIncreaseMaxLengthBy(elem)) {
-                            let dot_pos_past = el.selectionStart;
-                            el.value = el.value.substring(0, dot_pos_past);
-                        }
-                        elem.data('maxLength', el.initMaxLength);
-                    }
-                } catch (err) {
-                }
-            };
             $(elem).on("keypress", function (event) {
-                return checkPositive(elem, event);
-            });
-            $(elem).on("input", function (event) {
-                return change_maxLength(elem, event);
+                let value = event.currentTarget.value;
+                if (event.charCode >= 48 && event.charCode <= 57 && value.length < parseInt(attr.maxLength)) {
+                    ngModelCtrl.$parsers.push(fromUser);
+                }
+                else {
+                    event.preventDefault();
+                    event.stopImmediatePropagation();
+                }
             });
         }
     };

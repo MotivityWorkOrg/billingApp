@@ -42,8 +42,8 @@
                             <label class="col-sm-9 order-price-text">
                                 Price: {{orderItem.price}} x
                             </label>
-                            <input class="col-sm-3 order-text" title="orderTI" type="number" ng-maxlength="2"
-                                   ng-model="orderItem.numberOfOrders" order-count/>
+                            <input class="col-sm-3 order-text" title="orderTI" type="number" data-max-length="2"
+                                   ng-model="orderItem.numberOfOrders" order-count number-only/>
                             <button class="col-sm-4 btn btn-danger order-del"
                                     ng-click="home.itemCountChanged(orderItem)">Del
                             </button>
@@ -59,8 +59,8 @@
                 <option ng-repeat="method in home.paymentMethods" value="{{method.name}}">{{method.name}}</option>
             </select>
 
-            <input type="number" class="form-control" ng-model="home.discount"
-                   ng-disabled="home.selectedItems.length === 0"
+            <input type="number" class="form-control" ng-model="home.discount" data-max-length="2"
+                   ng-disabled="home.selectedItems.length === 0" number-only
                    style="width: 100px" placeholder="Enter discount" discount/>
             <div class="form-inline">
                 <label>Total Amout:</label>
