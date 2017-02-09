@@ -1,22 +1,19 @@
 // Sign In CSS Start Here
-
+.login-bg {
+  background: url(../images/bg.jpg) no-repeat;
+}
 .title {
   font-size: @font-size-lg;
-  padding: 20px;
-  border-bottom: 1px solid @gray-light;
-  margin: -20px -20px 20px;
-  background: @gray-light;
-  border-radius: 8px 8px 0px 0px;
+  padding: 0px 10px 25px;
+  text-align: center;
 }
 .signin-pg {
-  background: url(../images/login-bg.png) no-repeat left center;
-  background-size: 580px;
   .center-block {
     max-width: 95%;
     width: 400px;
     margin: auto;
     margin-top: 10%;
-    border: 1px solid @gray-light;
+    border: 10px solid @gray-light;
     padding: @pad-base * 2;
     .border-radius (10px);
   }
@@ -35,7 +32,7 @@
     max-width: 95%;
     width: 850px;
     margin:25px auto;
-    border: 1px solid @gray-light;
+    border: 10px solid @gray-light;
     padding: @pad-base * 2;
     .border-radius (10px);
   }
@@ -47,13 +44,13 @@
     .title ();
   }
   .form-group {
-    width: 100%;
+    width: 50%;
     max-width: 400px;
     float: left;
     padding-right: 20px;
   }
 }
-.clr {
+.clr, .clearfix {
   clear: both;
 }
 .btn {

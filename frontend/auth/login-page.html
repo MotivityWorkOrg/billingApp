@@ -1,12 +1,12 @@
 <div class="signin-pg">
     <div class="center-block">
-        <h1 class="usr-title">User Login</h1>
+        <h1 class="usr-title">Logo comes here</h1>
+        <h1 class="usr-title">Login To Your Account</h1>
         <form class="form " name="form" ng-submit="login(form, user)" autocomplete="off" novalidate>
 
             <div class="form-group" ng-class="{ 'has-success': form.username.$valid && submitted,
                                               'has-error': form.username.$invalid && submitted }">
-                <label for="loginEmail">Username</label>
-                <input type="text" name="username" class="form-control" placeholder="Enter username" id="loginEmail"
+                <input type="text" name="username" class="form-control" placeholder="Enter User Name" id="loginEmail"
                        ng-model="user.username" required>
                 <p class="help-block" ng-show="form.username.$error.required && submitted">
                     Email is required
@@ -15,8 +15,7 @@
 
             <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
                                               'has-error': form.password.$invalid && submitted }">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter password" class="form-control"
+                <input type="password" name="password" placeholder="Enter Password" class="form-control"
                        ng-model="user.password" required>
                 <p class="help-block" ng-show="form.password.$error.required && submitted">
                     Password is required
@@ -35,24 +34,29 @@
             </div>
 
             <div>
-                <button class="btn btn-inverse btn-sm btn-primary" type="submit">
+                <input type="checkbox">
+                <label>Remember Me</label>
+                <button class="btn btn-inverse btn-sm btn-primary pull-right" type="submit">
                     Login
                 </button>
-                <a class="btn btn-default btn-sm btn-register" ui-sref="signUp">
-                    Register
+            </div>
+            <div class="clearfix">
+                <a class="btn-register" ui-sref="signUp">
+                    Create New Account
                 </a>
                 <a class="btn btn-default btn-sm btn-link" ui-sref="forgotPassword">
                     Forgot Password
                 </a>
             </div>
-
-            <hr>
             <div>
-                <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-                    <i class="fa fa-facebook"></i> Connect with Facebook
+                Connect with: <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+                    <i class="fa fa-facebook"></i> Facebook
                 </a>
                 <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
-                    <i class="fa fa-twitter"></i> Connect with Twitter
+                    <i class="fa fa-twitter"></i> Twitter
+                </a>
+                <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
+                    <i class="fa fa-twitter"></i> G-Mail
                 </a>
             </div>
         </form>
