@@ -1,6 +1,9 @@
 require('./reset.less');
 import './lib/angular-bootstrap/ui-bootstrap-csp.css';
 import './lib/bootstrap/dist/css/bootstrap.css';
+window.$ = window.jQuery = require('./lib/jquery/dist/jquery.min');
+window.jQuery = jQuery;
+require('./lib/bootstrap/dist/js/bootstrap.min');
 import angular from './lib/angular';
 import uibs from './lib/angular-bootstrap';
 import uiRouter from './lib/angular-ui-router/release/angular-ui-router.min';

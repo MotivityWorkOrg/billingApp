@@ -1,6 +1,7 @@
 let Webpack = require('webpack');
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
 let autoPreFixer = require('autoprefixer-core');
+let jquery = require('./frontend/lib/jquery/dist/jquery.min');
 let path = require('path');
 let assetsPath = path.resolve(__dirname, 'public', 'assets');
 let entryPath = path.resolve(__dirname, 'frontend', 'index.module.js');
@@ -78,8 +79,10 @@ let config = {
                     'file?hash=sha512&digest=hex&name=[hash].[ext]',
                     'image?bypassOnDebug&optimizationLevel=7&interlaced=false'
                 ]
+            },
+            {
+                test: /jquery[\\\/]src[\\\/]selector\.js$/, loader: 'amd-define-factory-patcher-loader'
             }
-
         ]
     },
     postcss: [autoPreFixer],
@@ -90,8 +93,9 @@ let config = {
         // from Node
         new Webpack.HotModuleReplacementPlugin(),
         new Webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
+            jQuery: 'jquery',
+            $: 'jquery',
+            jquery: 'jquery'
         })
     ],
     jshint: {
