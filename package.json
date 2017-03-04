@@ -6,7 +6,7 @@
   "main": "index.js",
   "repository": "https://github.com/MotivityWorkOrg/billingApp.git",
   "scripts": {
-    "start": "node index"
+    "start": "node index open"
   },
   "keywords": [],
   "author": "Ravi <damarlaravi@gmail.com>",
@@ -22,6 +22,7 @@
     "fs": "0.0.1-security",
     "jsonwebtoken": "^5.0.5",
     "method-override": "^2.3.7",
+    "moesif-express": "^2.3.10",
     "moment": "^2.17.1",
     "mongoose": "^4.7.2",
     "morgan": "^1.7.0",
@@ -45,9 +46,14 @@
     "http-proxy": "^1.11.1",
     "image-webpack-loader": "^1.6.1",
     "imagemin": "^3.2.0",
+    "jasmine": "^2.5.3",
     "jquery": "^3.1.1",
     "jshint": "^2.9.4",
     "jshint-loader": "^0.8.3",
+    "karma": "^1.5.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-webpack": "^2.0.3",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
     "node-libs-browser": "^0.5.2",

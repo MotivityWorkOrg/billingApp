@@ -9,7 +9,6 @@ let bodyParser = require('body-parser');
 let methodOverride = require('method-override');
 let expressValidator = require('express-validator');
 let httpProxy = require('http-proxy');
-let proxy = httpProxy.createProxyServer();
 let app = express();
 let auth = require('./controllers/auth');
 let storeController = require('./controllers/store');
@@ -18,7 +17,7 @@ let passwordAPI = require('./controllers/forgot-password');
 let orderController = require('./controllers/order');
 let itemController = require('./controllers/item');
 let cors = require('./services/cors');
-
+let moesifExpress = require('moesif-express');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -95,6 +94,42 @@ app.use(function (err, req, res, next) {
 let isProduction = process.env.NODE_ENV === 'production';
 let host = process.env.APP_HOST || 'localhost';
 let port = isProduction ? 8080 : 3000;
+
+// Set the options, the only required field is applicationId.
+let options = {
+
+    applicationId: 'eyJhcHAiOiI1MTk6MTgiLCJ2ZXIiOiIyLjAiLCJvcmciOiIyMDc6NSIsImlhdCI6MTQ5NDExNTIwMH0.QaSO8fxmhwwwa7qq4zHGmOM1DZz-Ic1rDSdLdsUFbIw',
+
+    /*identifyUser: function (req, res) {
+     console.log(res);
+     if (req.user) {
+     return req.user.id;
+     }
+     return undefined;
+     },
+
+     getSessionToken: function (req, res) {
+     console.log(res);
+     /!*jshint sub:true*!/
+     return req.headers['Authorization'];
+     }*/
+};
+
+let proxy = httpProxy.createProxyServer(function (req, res) {
+    moesifExpress(options)(req, res, function () {
+        return res;
+    });
+
+    req.on('end', function () {
+
+        res.write(JSON.stringify({
+            message: "hello world!",
+            id: 2
+        }));
+        res.end();
+    });
+});
+
 if (!isProduction) {
     // Any requests to localhost:3000/assets is proxied
     // to webpack-dev-server
@@ -146,6 +181,9 @@ if (app.get('env') === 'development') {
         console.log(next);
     });
 }
+
+// Load the Moesif middleware
+app.use(moesifExpress(options));
 
 // production error handler
 // no stack traces leaked to user

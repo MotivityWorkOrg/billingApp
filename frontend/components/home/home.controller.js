@@ -101,11 +101,10 @@ export class HomeController {
     preparePrint(data) {
         let self = this;
         self.printableData = data;
-        this.$log.log(self.printableData, '   ::: In Print ');
+        //this.$log.log(self.printableData, '   ::: In Print ');
         let printModelInstance = this.$uibModal.open({
             animation: true,
             template: require('../print-modal/print-page.html'),
-            //windowTemplateUrl: '../print-modal/print-page.html',
             controller: PrintModalController,
             controllerAs: 'printCtrl',
             resolve: {
@@ -117,7 +116,7 @@ export class HomeController {
 
         printModelInstance.result.then(function () {
             printModelInstance.close();
-            console.log('Coming in Modal Instance');
+            //this.$log.log('Coming in Modal Instance');
         });
     }
 }
