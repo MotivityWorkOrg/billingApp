@@ -37,7 +37,8 @@ app.use(expressValidator());
 let mongoose = require('mongoose');
 
 // Build the connection string
-let dbURI = 'mongodb://localhost:27017/billingApp';
+//let dbURI = 'mongodb://localhost:27017/billingApp';
+let dbURI = 'mongodb://gopi:billing123@ds119446.mlab.com:19446/billing';
 
 // Create the database connection
 mongoose.connect(dbURI);
